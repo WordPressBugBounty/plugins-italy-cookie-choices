@@ -1,43 +1,5 @@
-<?php return array(
-    'root' => array(
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'type' => 'wordpress-plugin',
-        'install_path' => __DIR__ . '/../../',
-        'aliases' => array(),
-        'reference' => 'cbe3aa4b8a1b6f7c991e080709dc26df88d49eb0',
-        'name' => 'italycookiechoices/italy-cookie-choices',
-        'dev' => false,
-    ),
-    'versions' => array(
-        'italycookiechoices/italy-cookie-choices' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'type' => 'wordpress-plugin',
-            'install_path' => __DIR__ . '/../../',
-            'aliases' => array(),
-            'reference' => 'cbe3aa4b8a1b6f7c991e080709dc26df88d49eb0',
-            'dev_requirement' => false,
-        ),
-        'overclokk/cookie' => array(
-            'pretty_version' => 'v1.0.2',
-            'version' => '1.0.2.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../overclokk/cookie',
-            'aliases' => array(),
-            'reference' => 'd546068cb4042d35ca121ae50996d536c641f8e3',
-            'dev_requirement' => false,
-        ),
-        'overclokk/minimum-requirements' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'type' => 'wordpress-plugin',
-            'install_path' => __DIR__ . '/../overclokk/minimum-requirements',
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
-            'reference' => 'aa2d35381209d8dbc4632e2f30c9ef5614feef00',
-            'dev_requirement' => false,
-        ),
-    ),
-);
+<?php
+
+namespace ItalyCookieChoices\Vendor;
+
+return array('root' => array('name' => 'italycookiechoices/italy-cookie-choices', 'pretty_version' => '2.6.0', 'version' => '2.6.0.0', 'reference' => '92de964a95ad2601a652ec8d073e424bf8c99797', 'type' => 'wordpress-plugin', 'install_path' => __DIR__ . '/../../', 'aliases' => array(), 'dev' => \false), 'versions' => array('italycookiechoices/italy-cookie-choices' => array('pretty_version' => '2.6.0', 'version' => '2.6.0.0', 'reference' => '92de964a95ad2601a652ec8d073e424bf8c99797', 'type' => 'wordpress-plugin', 'install_path' => __DIR__ . '/../../', 'aliases' => array(), 'dev_requirement' => \false), 'italystrap/common' => array('pretty_version' => '1.0.1', 'version' => '1.0.1.0', 'reference' => 'c08e79c7a929601bdcdcbc5da958a03dbe0a6aea', 'type' => 'library', 'install_path' => __DIR__ . '/../italystrap/common', 'aliases' => array(), 'dev_requirement' => \false), 'italystrap/config' => array('pretty_version' => '2.11.1', 'version' => '2.11.1.0', 'reference' => 'ac014c305ee3bf986d3c4280dbb7cea34a31b27c', 'type' => 'library', 'install_path' => __DIR__ . '/../italystrap/config', 'aliases' => array(), 'dev_requirement' => \false), 'italystrap/storage' => array('pretty_version' => '1.0.2', 'version' => '1.0.2.0', 'reference' => 'b9a28fec685c38f289815fdf51942ab20b71c422', 'type' => 'library', 'install_path' => __DIR__ . '/../italystrap/storage', 'aliases' => array(), 'dev_requirement' => \false), 'overclokk/cookie' => array('pretty_version' => 'v1.0.2', 'version' => '1.0.2.0', 'reference' => 'd546068cb4042d35ca121ae50996d536c641f8e3', 'type' => 'library', 'install_path' => __DIR__ . '/../overclokk/cookie', 'aliases' => array(), 'dev_requirement' => \false), 'overclokk/minimum-requirements' => array('pretty_version' => 'dev-master', 'version' => 'dev-master', 'reference' => 'aa2d35381209d8dbc4632e2f30c9ef5614feef00', 'type' => 'wordpress-plugin', 'install_path' => __DIR__ . '/../overclokk/minimum-requirements', 'aliases' => array(0 => '9999999-dev'), 'dev_requirement' => \false)));

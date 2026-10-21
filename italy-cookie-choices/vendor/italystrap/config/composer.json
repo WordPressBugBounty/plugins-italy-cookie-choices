@@ -1,0 +1,136 @@
+{
+    "name": "italystrap\/config",
+    "description": "ItalyStrap Config Module - a simple and useful configuration package the OOP way",
+    "keywords": [
+        "Config",
+        "Configuration Object"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Enea Overclokk",
+            "email": "info@overclokk.net",
+            "homepage": "https:\/\/www.italystrap.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*",
+        "italystrap\/storage": "^1.0.0"
+    },
+    "require-dev": {
+        "lucatume\/wp-browser": "^3.1",
+        "lucatume\/function-mocker-le": "^1.0",
+        "codeception\/module-asserts": "^1.0",
+        "phpspec\/prophecy-phpunit": "^2.0",
+        "squizlabs\/php_codesniffer": "^3.7",
+        "phpcompatibility\/php-compatibility": "^9.3",
+        "dealerdirect\/phpcodesniffer-composer-installer": "^0.7.2",
+        "vimeo\/psalm": "^4.26",
+        "phpbench\/phpbench": "^1.2",
+        "phpmetrics\/phpmetrics": "^2.8",
+        "rector\/rector": "^2.0",
+        "infection\/infection": "^0.26.6",
+        "infection\/codeception-adapter": "^0.4.1",
+        "italystrap\/debug": "^2.1",
+        "italystrap\/event": "dev-master",
+        "italystrap\/storage-tests": "dev-master",
+        "cache\/integration-tests": "^0.17.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\": "src\/"
+        },
+        "classmap": [
+            "legacy\/"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests\/"
+        ],
+        "psr-4": {
+            "ItalyCookieChoices\\Vendor\\ItalyStrap\\Tests\\": "tests\/src",
+            "ItalyCookieChoices\\Vendor\\ItalyStrap\\Tests\\Unit\\": "tests\/unit",
+            "ItalyCookieChoices\\Vendor\\ItalyStrap\\Tests\\Stubs\\": "tests\/_data\/Stubs"
+        },
+        "files": []
+    },
+    "scripts": {
+        "qa": [
+            "@cs",
+            "@psalm",
+            "@unit",
+            "@clean",
+            "@infection",
+            "@examples"
+        ],
+        "tests": [
+            "@unit",
+            "@infection"
+        ],
+        "cs": [
+            "@php vendor\/bin\/phpcs"
+        ],
+        "cs:fix": [
+            "@php vendor\/bin\/phpcbf"
+        ],
+        "psalm": [
+            "@php vendor\/bin\/psalm --no-cache"
+        ],
+        "unit": [
+            "@php vendor\/bin\/codecept run unit"
+        ],
+        "unit:debug": [
+            "@php vendor\/bin\/codecept run unit --debug"
+        ],
+        "infection": [
+            "@php vendor\/bin\/infection --threads=4"
+        ],
+        "bench": [
+            "@php vendor\/bin\/phpbench run --report=stats"
+        ],
+        "bench:prev": [
+            "@php vendor\/bin\/phpbench run --report=stats --tag=original"
+        ],
+        "bench:compare:prev": [
+            "@php vendor\/bin\/phpbench run --report=stats --ref=original"
+        ],
+        "metrics": [
+            "@php vendor\/bin\/phpmetrics --report-html='.\/tests\/_output\/report' .\/src"
+        ],
+        "insights": [
+            "@php vendor\/bin\/phpinsights"
+        ],
+        "clean": [
+            "@php vendor\/bin\/codecept clean"
+        ],
+        "rector": [
+            "@php vendor\/bin\/rector process --dry-run"
+        ],
+        "rector:fix": [
+            "@php vendor\/bin\/rector process"
+        ],
+        "rector:downgrade": [
+            "@php vendor\/bin\/rector process --config=rector-downgrade-php-74.php"
+        ],
+        "examples": [
+            "@php example.php"
+        ]
+    },
+    "support": {
+        "issues": "https:\/\/github.com\/ItalyStrap\/config\/issues",
+        "source": "https:\/\/github.com\/ItalyStrap\/config"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer\/package-versions-deprecated": true,
+            "dealerdirect\/phpcodesniffer-composer-installer": true,
+            "infection\/extension-installer": true
+        }
+    }
+}

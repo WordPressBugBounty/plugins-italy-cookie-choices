@@ -1,0 +1,304 @@
+{
+    "packages": [
+        {
+            "name": "italystrap\/common",
+            "version": "1.0.1",
+            "version_normalized": "1.0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/ItalyStrap\/common.git",
+                "reference": "c08e79c7a929601bdcdcbc5da958a03dbe0a6aea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/ItalyStrap\/common\/zipball\/c08e79c7a929601bdcdcbc5da958a03dbe0a6aea",
+                "reference": "c08e79c7a929601bdcdcbc5da958a03dbe0a6aea",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "dealerdirect\/phpcodesniffer-composer-installer": "^1.0",
+                "phpcompatibility\/php-compatibility": "^9.3",
+                "rector\/rector": "^0.15.17",
+                "squizlabs\/php_codesniffer": "^3.7",
+                "vimeo\/psalm": "^5.6"
+            },
+            "time": "2024-10-09T16:46:25+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\": "storage\/"
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Enea",
+                    "email": "info@overclokk.net",
+                    "homepage": "https:\/\/www.italystrap.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A shared library for ItalyStrap project for ItalyStrap project",
+            "keywords": [
+                "ItalyStrap",
+                "common",
+                "library"
+            ],
+            "support": {
+                "issues": "https:\/\/github.com\/ItalyStrap\/common\/issues",
+                "source": "https:\/\/github.com\/ItalyStrap\/common"
+            },
+            "install-path": "..\/italystrap\/common"
+        },
+        {
+            "name": "italystrap\/config",
+            "version": "2.11.1",
+            "version_normalized": "2.11.1.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/ItalyStrap\/config.git",
+                "reference": "ac014c305ee3bf986d3c4280dbb7cea34a31b27c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/ItalyStrap\/config\/zipball\/ac014c305ee3bf986d3c4280dbb7cea34a31b27c",
+                "reference": "ac014c305ee3bf986d3c4280dbb7cea34a31b27c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "italystrap\/storage": "^1.0.0",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "cache\/integration-tests": "^0.17.0",
+                "codeception\/module-asserts": "^1.0",
+                "dealerdirect\/phpcodesniffer-composer-installer": "^0.7.2",
+                "infection\/codeception-adapter": "^0.4.1",
+                "infection\/infection": "^0.26.6",
+                "italystrap\/debug": "^2.1",
+                "italystrap\/event": "dev-master",
+                "italystrap\/storage-tests": "dev-master",
+                "lucatume\/function-mocker-le": "^1.0",
+                "lucatume\/wp-browser": "^3.1",
+                "phpbench\/phpbench": "^1.2",
+                "phpcompatibility\/php-compatibility": "^9.3",
+                "phpmetrics\/phpmetrics": "^2.8",
+                "phpspec\/prophecy-phpunit": "^2.0",
+                "rector\/rector": "^2.0",
+                "squizlabs\/php_codesniffer": "^3.7",
+                "vimeo\/psalm": "^4.26"
+            },
+            "time": "2026-10-05T04:55:04+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\": "src\/"
+                },
+                "classmap": [
+                    "legacy\/"
+                ]
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Enea Overclokk",
+                    "email": "info@overclokk.net",
+                    "homepage": "https:\/\/www.italystrap.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ItalyStrap Config Module - a simple and useful configuration package the OOP way",
+            "keywords": [
+                "Configuration Object",
+                "config"
+            ],
+            "support": {
+                "issues": "https:\/\/github.com\/ItalyStrap\/config\/issues",
+                "source": "https:\/\/github.com\/ItalyStrap\/config"
+            },
+            "install-path": "..\/italystrap\/config"
+        },
+        {
+            "name": "italystrap\/storage",
+            "version": "1.0.2",
+            "version_normalized": "1.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/ItalyStrap\/storage.git",
+                "reference": "b9a28fec685c38f289815fdf51942ab20b71c422"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/ItalyStrap\/storage\/zipball\/b9a28fec685c38f289815fdf51942ab20b71c422",
+                "reference": "b9a28fec685c38f289815fdf51942ab20b71c422",
+                "shasum": ""
+            },
+            "require": {
+                "italystrap\/common": "^1.0",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "codeception\/module-asserts": "^1.0",
+                "codeception\/module-db": "^1.2",
+                "codeception\/module-phpbrowser": "^1.0",
+                "dealerdirect\/phpcodesniffer-composer-installer": "^1.0",
+                "humanmade\/psalm-plugin-wordpress": "^3.0.0-alpha1",
+                "infection\/codeception-adapter": "^0.4.1",
+                "infection\/infection": "^0.26.6",
+                "inpsyde\/wp-stubs": "dev-main",
+                "italystrap\/debug": "^2.1",
+                "italystrap\/storage-tests": "dev-master",
+                "lucatume\/function-mocker-le": "^1.0",
+                "lucatume\/wp-browser": "^3.1",
+                "phpbench\/phpbench": "^1.2",
+                "phpcompatibility\/php-compatibility": "^9.3",
+                "phpmetrics\/phpmetrics": "^2.8",
+                "phpspec\/prophecy-phpunit": "^2.0",
+                "rector\/rector": "^0.15.17",
+                "squizlabs\/php_codesniffer": "^3.7",
+                "vimeo\/psalm": "^5.6"
+            },
+            "time": "2024-10-09T15:56:43+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\": [
+                        "src\/"
+                    ]
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Enea",
+                    "email": "info@overclokk.net",
+                    "homepage": "http:\/\/overclokk.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A storage library for ItalyStrap",
+            "keywords": [
+                "ItalyStrap",
+                "storage"
+            ],
+            "support": {
+                "issues": "https:\/\/github.com\/ItalyStrap\/storage\/issues",
+                "source": "https:\/\/github.com\/ItalyStrap\/storage"
+            },
+            "install-path": "..\/italystrap\/storage"
+        },
+        {
+            "name": "overclokk\/cookie",
+            "version": "v1.0.2",
+            "version_normalized": "1.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/overclokk\/cookie.git",
+                "reference": "d546068cb4042d35ca121ae50996d536c641f8e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/overclokk\/cookie\/zipball\/d546068cb4042d35ca121ae50996d536c641f8e3",
+                "reference": "d546068cb4042d35ca121ae50996d536c641f8e3",
+                "shasum": ""
+            },
+            "require-dev": {
+                "lucatume\/wp-browser": "^1.19"
+            },
+            "time": "2018-02-17T15:45:52+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\Overclokk\\Cookie\\": "src\/"
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "overclokk",
+                    "email": "info@overclokk.net"
+                }
+            ],
+            "description": "A simple and light cookie manager class",
+            "support": {
+                "issues": "https:\/\/github.com\/overclokk\/cookie\/issues",
+                "source": "https:\/\/github.com\/overclokk\/cookie\/tree\/master"
+            },
+            "install-path": "..\/overclokk\/cookie"
+        },
+        {
+            "name": "overclokk\/minimum-requirements",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/overclokk\/minimum-requirements.git",
+                "reference": "aa2d35381209d8dbc4632e2f30c9ef5614feef00"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/overclokk\/minimum-requirements\/zipball\/aa2d35381209d8dbc4632e2f30c9ef5614feef00",
+                "reference": "aa2d35381209d8dbc4632e2f30c9ef5614feef00",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "lucatume\/function-mocker": "^1.0",
+                "lucatume\/wp-browser": "^1.10"
+            },
+            "time": "2018-12-24T09:07:01+00:00",
+            "default-branch": true,
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "overclokk",
+                    "email": "info@overclokk.net",
+                    "homepage": "http:\/\/www.overclokk.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Check the minimum requirements for your WordPress theme or plugin",
+            "homepage": "https:\/\/github.com\/overclokk\/minimum-requirements",
+            "keywords": [
+                "plugin",
+                "wordpress",
+                "wordpress plugin"
+            ],
+            "support": {
+                "issues": "https:\/\/github.com\/overclokk\/minimum-requirements\/issues",
+                "source": "https:\/\/github.com\/overclokk\/minimum-requirements\/tree\/1.0.1"
+            },
+            "abandoned": true,
+            "install-path": "..\/overclokk\/minimum-requirements"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}

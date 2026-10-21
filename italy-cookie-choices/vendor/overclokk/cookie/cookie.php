@@ -1,4 +1,7 @@
 <?php
+
+namespace ItalyCookieChoices\Vendor;
+
 /**
  * Plugin Name: Cookie
  * Description: Light and simple Cookie Manager API Class
@@ -10,7 +13,6 @@
  * Text Domain: cookie
  * Domain Path: cookie
  */
-
 /*
 
     Copyright (C) 2017  Enea Overclokk  info@overclokk.net
@@ -28,19 +30,13 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-
 /**
  * This file does nothing, the only purpose is to test in a WordPress enviroment, load it with composer in your project instead.
  */
 // require( __DIR__ . '/src/Cookie.php' );
 // require( __DIR__ . '/src/Cookie_Interface.php' );
-
-require( __DIR__ . '/vendor/autoload.php' );
-
-$cookie = new \Overclokk\Cookie\Cookie( $_COOKIE );
-
+require __DIR__ . '/vendor/autoload.php';
+$cookie = new \ItalyCookieChoices\Vendor\Overclokk\Cookie\Cookie($_COOKIE);
 $cookie_name = 'cookie_name';
-
-$cookie_value = $cookie->get( $cookie_name );
-
-var_dump( $cookie_value === $_COOKIE[ $cookie_name ] );
+$cookie_value = $cookie->get($cookie_name);
+\var_dump($cookie_value === $_COOKIE[$cookie_name]);

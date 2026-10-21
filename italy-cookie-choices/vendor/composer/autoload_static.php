@@ -4,45 +4,88 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitec597b0e5e5ebb90729915bd317b0a70
+class ComposerStaticInit58ed27c25b294aed6967981e7e3ded4a
 {
     public static $prefixLengthsPsr4 = array (
-        'O' => 
-        array (
-            'Overclokk\\Cookie\\' => 17,
-        ),
-        'I' => 
+        'I' =>
         array (
             'Italy_Cookie_Choices\\Core\\' => 26,
             'Italy_Cookie_Choices\\Admin\\' => 27,
+            'Italy_Cookie_Choices\\' => 21,
+            'ItalyCookieChoices\\Vendor\\Overclokk\\Cookie\\' => 43,
+            'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\' => 45,
+            'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\' => 44,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Overclokk\\Cookie\\' => 
+        'Italy_Cookie_Choices\\Core\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/legacy/core',
+        ),
+        'Italy_Cookie_Choices\\Admin\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/legacy/admin',
+        ),
+        'Italy_Cookie_Choices\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
+        'ItalyCookieChoices\\Vendor\\Overclokk\\Cookie\\' =>
         array (
             0 => __DIR__ . '/..' . '/overclokk/cookie/src',
         ),
-        'Italy_Cookie_Choices\\Core\\' => 
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\' =>
         array (
-            0 => __DIR__ . '/../..' . '/core',
+            0 => __DIR__ . '/..' . '/italystrap/storage/src',
+            1 => __DIR__ . '/..' . '/italystrap/common/storage',
         ),
-        'Italy_Cookie_Choices\\Admin\\' => 
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\' =>
         array (
-            0 => __DIR__ . '/../..' . '/admin',
+            0 => __DIR__ . '/..' . '/italystrap/config/src',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\AccessValueInArrayWithNotationTrait' => __DIR__ . '/..' . '/italystrap/config/src/AccessValueInArrayWithNotationTrait.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\ArrayObjectTrait' => __DIR__ . '/..' . '/italystrap/config/src/ArrayObjectTrait.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\Config' => __DIR__ . '/..' . '/italystrap/config/src/Config.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\ConfigFactory' => __DIR__ . '/..' . '/italystrap/config/src/ConfigFactory.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\ConfigInterface' => __DIR__ . '/..' . '/italystrap/config/src/ConfigInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\ConfigThemeMods' => __DIR__ . '/..' . '/italystrap/config/legacy/ConfigThemeMods.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\Config_Factory' => __DIR__ . '/..' . '/italystrap/config/legacy/Config_Factory.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\Config_Interface' => __DIR__ . '/..' . '/italystrap/config/legacy/Config_Interface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\DeprecatedTrait' => __DIR__ . '/..' . '/italystrap/config/legacy/DeprecatedTrait.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\NodeManipulationInterface' => __DIR__ . '/..' . '/italystrap/config/src/NodeManipulationInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\SignalCode' => __DIR__ . '/..' . '/italystrap/config/src/SignalCode.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\BinaryCacheDecorator' => __DIR__ . '/..' . '/italystrap/storage/src/BinaryCacheDecorator.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\Cache' => __DIR__ . '/..' . '/italystrap/storage/src/Cache.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\CacheInterface' => __DIR__ . '/..' . '/italystrap/common/storage/CacheInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\ClearableInterface' => __DIR__ . '/..' . '/italystrap/common/storage/ClearableInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\IncrDecrInterface' => __DIR__ . '/..' . '/italystrap/common/storage/IncrDecrInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\Mod' => __DIR__ . '/..' . '/italystrap/storage/src/Mod.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\MultipleTrait' => __DIR__ . '/..' . '/italystrap/storage/src/MultipleTrait.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\NormalizeTtlTrait' => __DIR__ . '/..' . '/italystrap/storage/src/NormalizeTtlTrait.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\Option' => __DIR__ . '/..' . '/italystrap/storage/src/Option.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\SetMultipleCacheTrait' => __DIR__ . '/..' . '/italystrap/storage/src/SetMultipleCacheTrait.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\SetMultipleStoreTrait' => __DIR__ . '/..' . '/italystrap/storage/src/SetMultipleStoreTrait.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\StoreInterface' => __DIR__ . '/..' . '/italystrap/common/storage/StoreInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\Transient' => __DIR__ . '/..' . '/italystrap/storage/src/Transient.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\ValidateKeyLength' => __DIR__ . '/..' . '/italystrap/storage/src/ValidateKeyLength.php',
+        'ItalyCookieChoices\\Vendor\\Overclokk\\Cookie\\Cookie' => __DIR__ . '/..' . '/overclokk/cookie/src/Cookie.php',
+        'ItalyCookieChoices\\Vendor\\Overclokk\\Cookie\\Cookie_Interface' => __DIR__ . '/..' . '/overclokk/cookie/src/Cookie_Interface.php',
+        'Italy_Cookie_Choices\\Admin\\Sanitize' => __DIR__ . '/../..' . '/legacy/admin/Sanitize.php',
+        'Italy_Cookie_Choices\\Admin\\Settings' => __DIR__ . '/../..' . '/legacy/admin/Settings.php',
+        'Italy_Cookie_Choices\\Core\\Cookie_Choices' => __DIR__ . '/../..' . '/legacy/core/Cookie_Choices.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitec597b0e5e5ebb90729915bd317b0a70::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitec597b0e5e5ebb90729915bd317b0a70::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitec597b0e5e5ebb90729915bd317b0a70::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit58ed27c25b294aed6967981e7e3ded4a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit58ed27c25b294aed6967981e7e3ded4a::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit58ed27c25b294aed6967981e7e3ded4a::$classMap;
 
         }, null, ClassLoader::class);
     }

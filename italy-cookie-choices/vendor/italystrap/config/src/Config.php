@@ -1,0 +1,304 @@
+<?php
+
+declare (strict_types=1);
+namespace ItalyCookieChoices\Vendor\ItalyStrap\Config;
+
+use ArrayObject;
+use ItalyCookieChoices\Vendor\ItalyStrap\Storage\MultipleTrait;
+use ItalyCookieChoices\Vendor\ItalyStrap\Storage\SetMultipleStoreTrait;
+/**
+ * @template TKey as array-key
+ * @template TValue
+ *
+ * @template-implements \ItalyStrap\Config\ConfigInterface<TKey,TValue>
+ * @template-implements \ItalyStrap\Config\NodeManipulationInterface<TKey,TValue>
+ * @template-extends \ArrayObject<TKey,TValue>
+ * @psalm-suppress DeprecatedInterface
+ */
+class Config extends ArrayObject implements ConfigInterface, NodeManipulationInterface, \JsonSerializable
+{
+    /**
+     * @use ArrayObjectTrait<TKey,TValue>
+     */
+    use ArrayObjectTrait;
+    use AccessValueInArrayWithNotationTrait;
+    use DeprecatedTrait;
+    use MultipleTrait;
+    use SetMultipleStoreTrait;
+    /**
+     * @var array<TKey, TValue>
+     */
+    private array $storage = [];
+    /**
+     * @var ?TValue
+     */
+    private $temp;
+    /**
+     * @var ?TValue
+     */
+    private $default;
+    private string $delimiter = '.';
+    /**
+     * Config constructor
+     *
+     * @param array<TKey, TValue> $config
+     * @param array<TKey, TValue> $default Deprecated
+     */
+    public function __construct($config = [], $default = [])
+    {
+        /** @infection-ignore-all */
+        if ($default !== []) {
+            \trigger_error('The second argument `$default` is deprecated and will be removed in the next major version.' . ' Use the first argument `$config` to provide a default value and `class::merge()` method' . ' to add more arrays to merge with the default one.', \E_USER_DEPRECATED);
+        }
+        /**
+         * @var class-string<\ArrayIterator<TKey, TValue>>|class-string<ArrayObject<TKey, TValue>> $iteratorClass
+         */
+        $iteratorClass = \RecursiveArrayIterator::class;
+        $this->merge($default, $config);
+        parent::__construct($this->storage, ArrayObject::ARRAY_AS_PROPS, $iteratorClass);
+    }
+    /**
+     * @param TKey|string|int|array $key
+     * @param TValue $default
+     * @return TValue
+     */
+    public function get($key, $default = null)
+    {
+        $this->default = $default;
+        if (!$this->has($key)) {
+            return $default;
+        }
+        // The class::temp variable is always set by the class::has() method
+        return $this->temp;
+    }
+    /**
+     * @param TKey|string|int|array $key
+     */
+    public function has($key): bool
+    {
+        /**
+         * @psalm-suppress MixedAssignment
+         */
+        $this->temp = $this->findValue($this->storage, $this->buildLevels($key), $this->default);
+        $this->default = null;
+        return $this->temp !== null;
+    }
+    /**
+     * @param TKey|string|int|array $key
+     * @param TValue|mixed $value
+     */
+    public function set($key, $value): bool
+    {
+        $result = $this->insertValue($this->storage, $this->buildLevels($key), $value);
+        parent::exchangeArray($this->storage);
+        return $result;
+    }
+    public function update($key, $value): bool
+    {
+        return $this->set($key, $value);
+    }
+    /**
+     * @param TKey|string|int|array $key
+     */
+    public function delete($key): bool
+    {
+        $result = $this->deleteValue($this->storage, $this->buildLevels($key));
+        parent::exchangeArray($this->storage);
+        return $result;
+    }
+    /**
+     * @param TKey|string|int|array $key
+     * @param TValue $value
+     */
+    public function appendTo($key, $value): bool
+    {
+        $levels = $this->buildLevels($key);
+        /** @var TValue $default */
+        $default = [];
+        /** @var array<array-key, TValue> $oldValue */
+        $oldValue = $this->findValue($this->storage, $levels, $default);
+        $this->assertList($oldValue, $levels);
+        $oldValue = \array_merge($oldValue, (array) $value);
+        $result = $this->insertValue($this->storage, $levels, $oldValue);
+        parent::exchangeArray($this->storage);
+        return $result;
+    }
+    /**
+     * @param TKey|string|int|array $key
+     * @param TValue $value
+     */
+    public function prependTo($key, $value): bool
+    {
+        $levels = $this->buildLevels($key);
+        /** @var TValue $default */
+        $default = [];
+        /** @var array<array-key, TValue> $oldValue */
+        $oldValue = $this->findValue($this->storage, $levels, $default);
+        $this->assertList($oldValue, $levels);
+        $oldValue = \array_merge((array) $value, $oldValue);
+        $result = $this->insertValue($this->storage, $levels, $oldValue);
+        parent::exchangeArray($this->storage);
+        return $result;
+    }
+    /**
+     * @param TKey|string|int|array $key
+     * @param TValue|mixed $value
+     */
+    public function insertAt($key, $value, int $position): bool
+    {
+        $levels = $this->buildLevels($key);
+        /** @var TValue $default */
+        $default = [];
+        /** @var array<array-key, TValue> $oldValue */
+        $oldValue = $this->findValue($this->storage, $levels, $default);
+        $this->assertList($oldValue, $levels);
+        $oldValue = \array_merge(\array_slice($oldValue, 0, $position), (array) $value, \array_slice($oldValue, $position));
+        $result = $this->insertValue($this->storage, $levels, $oldValue);
+        parent::exchangeArray($this->storage);
+        return $result;
+    }
+    /**
+     * @param TKey|string|int|array $key
+     * @param TValue|mixed $value
+     */
+    public function deleteFrom($key, $value): bool
+    {
+        $levels = $this->buildLevels($key);
+        /** @var array<array-key, TValue>|null $oldValue */
+        $oldValue = $this->findValue($this->storage, $levels);
+        if ($oldValue === null) {
+            return \true;
+        }
+        $this->assertList($oldValue, $levels, 'delete');
+        /** @var array<array-key, TValue> $toRemove */
+        $toRemove = (array) $value;
+        foreach ($toRemove as $needle) {
+            $index = \array_search($needle, $oldValue, \true);
+            if ($index !== \false) {
+                unset($oldValue[$index]);
+                // removes only the first occurrence.
+            }
+        }
+        if ($oldValue === []) {
+            $result = $this->deleteValue($this->storage, $levels);
+            parent::exchangeArray($this->storage);
+            return $result;
+        }
+        $oldValue = \array_merge($oldValue);
+        $result = $this->insertValue($this->storage, $levels, $oldValue);
+        parent::exchangeArray($this->storage);
+        return $result;
+    }
+    /**
+     * @param mixed $value
+     * @param array<array-key, string> $levels Pre-computed key levels
+     */
+    private function assertList($value, array $levels, string $methodName = 'set'): void
+    {
+        if (!\is_array($value)) {
+            throw new \RuntimeException(\sprintf('The value at "%s" is not an array, use the `%s::%s()` method instead', \implode('.', $levels), self::class, $methodName));
+        }
+    }
+    /**
+     * @param array<TKey, TValue>|\IteratorAggregate|\Iterator|\stdClass|string ...$array_to_merge
+     */
+    public function merge(...$array_to_merge): Config
+    {
+        foreach ($array_to_merge as $key => $array) {
+            if ($array instanceof \Traversable) {
+                $array = \iterator_to_array($array);
+            }
+            if (!\is_array($array)) {
+                $array = (array) $array;
+            }
+            // Make sure any value given is casting to array
+            $array_to_merge[$key] = $array;
+        }
+        /**
+         * We don't need to foreach here, \array_replace_recursive() do the job for us.
+         * @psalm-suppress PossiblyInvalidArgument
+         */
+        $this->storage = \array_replace_recursive($this->storage, ...$array_to_merge);
+        parent::exchangeArray($this->storage);
+        return $this;
+    }
+    /**
+     * Traverse the config array and call the callback
+     * for each element in the array recursively and in a depth-first order.
+     *
+     * The callback can accept up to four parameters:
+     * - mixed &$value: The current value, passed by reference.
+     * - string|int $key: The current key.
+     * - Config $config: The Config instance.
+     * - array $keyPath: The full key path to the current element.
+     *
+     * @param array<callable(TValue, TKey, Config, array): void> $visitor
+     */
+    public function traverse(callable ...$visitor): void
+    {
+        $this->traverseArray($this->storage, $visitor);
+        parent::exchangeArray($this->storage);
+    }
+    /**
+     * @param array<TKey, TValue> $storage
+     * @param array<array-key, callable> $visitors
+     */
+    private function traverseArray(array &$storage, array $visitors, array $keyPath = []): void
+    {
+        foreach ($storage as $key => &$current) {
+            $path = \array_merge($keyPath, [$key]);
+            $skipChildren = \false;
+            foreach ($visitors as $visitor) {
+                /**
+                 * @var null|int $signal
+                 */
+                $signal = $visitor($current, $key, $this, $path);
+                if ($signal === SignalCode::NONE) {
+                    continue;
+                    // Continue to the next callback
+                }
+                if ($signal === SignalCode::STOP_TRAVERSAL) {
+                    break 2;
+                    // Stop the current iteration and the parent iteration
+                }
+                if ($signal === SignalCode::REMOVE_NODE) {
+                    unset($storage[$key]);
+                }
+                if ($signal === SignalCode::REMOVE_NODE || $signal === SignalCode::CONTINUE) {
+                    continue 2;
+                    // Skip to the next sibling node
+                }
+                if ($signal === SignalCode::SKIP_CHILDREN) {
+                    $skipChildren = \true;
+                }
+            }
+            if (!$skipChildren && \is_array($current)) {
+                $this->traverseArray($current, $visitors, $path);
+            }
+        }
+    }
+    public function toArray(): array
+    {
+        return $this->getArrayCopy();
+    }
+    public function jsonSerialize(): array
+    {
+        return $this->getArrayCopy();
+    }
+    /**
+     * @param TKey|string|int|array $key
+     * @return array<array-key, string>
+     */
+    private function buildLevels($key): array
+    {
+        if (\is_array($key)) {
+            /**
+             * @psalm-suppress MixedArgument
+             * @todo Remove this suppression when PHP 8.0 will be the minimum required version
+             *       so Union Types will be available
+             */
+            return \array_map('strval', $key);
+        }
+        return \explode($this->delimiter, (string) $key);
+    }
+}
