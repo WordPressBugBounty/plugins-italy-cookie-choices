@@ -1,14 +1,15 @@
 <?php
 /**
- * Plugin Name: Italy Cookie Choices (for EU Cookie Law & Cookie Notice)
+ * Plugin Name: Cookie Choices (for EU Cookie Law & GDPR)
  * Plugin URI: https://github.com/ItalyCookieChoices/italy-cookie-choices
- * Description: Italy Cookie Choices allows you to easily comply with the european cookie law and block third part cookie in your page.
- * Version: 2.6.0
- * Requires at least: 6.1
- * Requires PHP: 7.4
+ * Description: Asks the cookie consent by category and blocks the third party scripts, videos and maps until the consent.
+ * Version: 3.0.1
+ * Requires at least: 6.5
+ * Requires PHP: 8.2
  * Author: Enea Overclokk, Andrea Pernici, Andrea Cardinale
  * Author URI: https://github.com/ItalyCookieChoices/italy-cookie-choices
  * Text Domain: italy-cookie-choices
+ * Domain Path: /languages
  * License: GPLv2 or later
  * Git URI: https://github.com/ItalyCookieChoices/italy-cookie-choices
  * GitHub Plugin URI: https://github.com/ItalyCookieChoices/italy-cookie-choices
@@ -38,15 +39,15 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-require( __DIR__ . '/legacy/define-constants.php' );
+require __DIR__ . '/vendor/autoload.php';
+
+require __DIR__ . '/legacy/define-constants.php';
 
 icc_set_plugin_default_constant();
 
-require( __DIR__ . '/legacy/bootstrap.php' );
+require __DIR__ . '/bootstrap.php';
 
-/**
- * Fires once Italy_Cookie_Choices plugin has been loaded.
- *
- * @since 2.5.0
- */
-do_action( 'icc_plugin_loaded' );
+// The daily cleanup of the consent log starts again on the next request after the activation.
+register_deactivation_hook( __FILE__, static function (): void {
+	wp_clear_scheduled_hook( 'italy_cookie_choices_consent_log_cleanup' );
+} );

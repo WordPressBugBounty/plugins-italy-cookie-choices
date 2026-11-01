@@ -1,0 +1,24 @@
+{
+  "source": {
+    "directories": [
+      "src"
+    ]
+  },
+  "logs": {
+    "text": "php://stdout",
+    "badge": {
+      "branch": "master"
+    }
+  },
+  "timeout": 10,
+  "mutators": {
+    "@default": true,
+    "@regex": {
+      "ignore": [
+        "ItalyStrap\\Finder\\Finder::find"
+      ]
+    }
+  },
+  "testFramework": "codeception",
+  "testFrameworkOptions": "--skip=wpunit --skip=acceptance --skip=functional"
+}

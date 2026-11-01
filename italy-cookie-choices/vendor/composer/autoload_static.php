@@ -4,50 +4,176 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit58ed27c25b294aed6967981e7e3ded4a
+class ComposerStaticInitcda05f80d82cdf5b46c714ccca9f150f
 {
+    public static $files = array (
+        '287955b017905d449a1b12272ea13121' => __DIR__ . '/..' . '/italystrap/finder/functions/autoload.php',
+        'b2fa494df080c1f82c19e3e376ab6e64' => __DIR__ . '/..' . '/italystrap/empress/namespace-bc-aliases.php',
+        '19cebbfbcfcdcbcf2d3f54eda92c5974' => __DIR__ . '/..' . '/italystrap/event/namespace-bc-aliases.php',
+        '215977b8b38e7164125abec5a7ca1930' => __DIR__ . '/..' . '/italystrap/view/functions/autoload.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'I' =>
         array (
-            'Italy_Cookie_Choices\\Core\\' => 26,
-            'Italy_Cookie_Choices\\Admin\\' => 27,
-            'Italy_Cookie_Choices\\' => 21,
-            'ItalyCookieChoices\\Vendor\\Overclokk\\Cookie\\' => 43,
+            'ItalyCookieChoices\\Vendor\\Webimpress\\SafeWriter\\' => 48,
+            'ItalyCookieChoices\\Vendor\\Psr\\Log\\' => 34,
+            'ItalyCookieChoices\\Vendor\\Psr\\EventDispatcher\\' => 46,
+            'ItalyCookieChoices\\Vendor\\Psr\\Container\\' => 40,
+            'ItalyCookieChoices\\Vendor\\ItalyStrap\\View\\' => 42,
             'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\' => 45,
+            'ItalyCookieChoices\\Vendor\\ItalyStrap\\PsrDispatcher\\' => 51,
+            'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\' => 44,
+            'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\' => 43,
+            'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\' => 45,
             'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\' => 44,
+            'ItalyCookieChoices\\Vendor\\Auryn\\' => 32,
+            'ItalyCookieChoices\\' => 19,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Italy_Cookie_Choices\\Core\\' =>
+        'ItalyCookieChoices\\Vendor\\Webimpress\\SafeWriter\\' =>
         array (
-            0 => __DIR__ . '/../..' . '/legacy/core',
+            0 => __DIR__ . '/..' . '/webimpress/safe-writer/src',
         ),
-        'Italy_Cookie_Choices\\Admin\\' =>
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\' =>
         array (
-            0 => __DIR__ . '/../..' . '/legacy/admin',
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'Italy_Cookie_Choices\\' =>
+        'ItalyCookieChoices\\Vendor\\Psr\\EventDispatcher\\' =>
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/..' . '/psr/event-dispatcher/src',
         ),
-        'ItalyCookieChoices\\Vendor\\Overclokk\\Cookie\\' =>
+        'ItalyCookieChoices\\Vendor\\Psr\\Container\\' =>
         array (
-            0 => __DIR__ . '/..' . '/overclokk/cookie/src',
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\View\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/italystrap/view/src',
         ),
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\' =>
         array (
             0 => __DIR__ . '/..' . '/italystrap/storage/src',
             1 => __DIR__ . '/..' . '/italystrap/common/storage',
         ),
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\PsrDispatcher\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/italystrap/event/tests/_data/experiment/PsrDispatcher',
+        ),
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/italystrap/finder/src',
+        ),
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/italystrap/event/src',
+        ),
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/italystrap/empress/src',
+        ),
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\' =>
         array (
             0 => __DIR__ . '/..' . '/italystrap/config/src',
+        ),
+        'ItalyCookieChoices\\Vendor\\Auryn\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/overclokk/auryn/lib',
+        ),
+        'ItalyCookieChoices\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'ItalyCookieChoices\\Blocking\\Application\\BuildingVendors' => __DIR__ . '/../..' . '/src/Blocking/Application/BuildingVendors.php',
+        'ItalyCookieChoices\\Blocking\\Application\\VendorPresets' => __DIR__ . '/../..' . '/src/Blocking/Application/VendorPresets.php',
+        'ItalyCookieChoices\\Blocking\\Application\\VendorsFactory' => __DIR__ . '/../..' . '/src/Blocking/Application/VendorsFactory.php',
+        'ItalyCookieChoices\\Blocking\\Domain\\Vendor' => __DIR__ . '/../..' . '/src/Blocking/Domain/Vendor.php',
+        'ItalyCookieChoices\\Blocking\\Domain\\Vendors' => __DIR__ . '/../..' . '/src/Blocking/Domain/Vendors.php',
+        'ItalyCookieChoices\\Blocking\\Infrastructure\\HtmlBlocker' => __DIR__ . '/../..' . '/src/Blocking/Infrastructure/HtmlBlocker.php',
+        'ItalyCookieChoices\\Blocking\\Module' => __DIR__ . '/../..' . '/src/Blocking/Module.php',
+        'ItalyCookieChoices\\Blocking\\UI\\BlockableRequest' => __DIR__ . '/../..' . '/src/Blocking/UI/BlockableRequest.php',
+        'ItalyCookieChoices\\Blocking\\UI\\BlockingFilters' => __DIR__ . '/../..' . '/src/Blocking/UI/BlockingFilters.php',
+        'ItalyCookieChoices\\Blocking\\UI\\PageBuffer' => __DIR__ . '/../..' . '/src/Blocking/UI/PageBuffer.php',
+        'ItalyCookieChoices\\Blocking\\UI\\Placeholders' => __DIR__ . '/../..' . '/src/Blocking/UI/Placeholders.php',
+        'ItalyCookieChoices\\ConsentLog\\Application\\LogSettings' => __DIR__ . '/../..' . '/src/ConsentLog/Application/LogSettings.php',
+        'ItalyCookieChoices\\ConsentLog\\Application\\RecordConsent' => __DIR__ . '/../..' . '/src/ConsentLog/Application/RecordConsent.php',
+        'ItalyCookieChoices\\ConsentLog\\Domain\\ConsentId' => __DIR__ . '/../..' . '/src/ConsentLog/Domain/ConsentId.php',
+        'ItalyCookieChoices\\ConsentLog\\Domain\\ConsentLog' => __DIR__ . '/../..' . '/src/ConsentLog/Domain/ConsentLog.php',
+        'ItalyCookieChoices\\ConsentLog\\Domain\\ConsentRecord' => __DIR__ . '/../..' . '/src/ConsentLog/Domain/ConsentRecord.php',
+        'ItalyCookieChoices\\ConsentLog\\Domain\\Retention' => __DIR__ . '/../..' . '/src/ConsentLog/Domain/Retention.php',
+        'ItalyCookieChoices\\ConsentLog\\Infrastructure\\DatabaseConsentLog' => __DIR__ . '/../..' . '/src/ConsentLog/Infrastructure/DatabaseConsentLog.php',
+        'ItalyCookieChoices\\ConsentLog\\Infrastructure\\LogTable' => __DIR__ . '/../..' . '/src/ConsentLog/Infrastructure/LogTable.php',
+        'ItalyCookieChoices\\ConsentLog\\Module' => __DIR__ . '/../..' . '/src/ConsentLog/Module.php',
+        'ItalyCookieChoices\\ConsentLog\\UI\\ConsentLogEndpoint' => __DIR__ . '/../..' . '/src/ConsentLog/UI/ConsentLogEndpoint.php',
+        'ItalyCookieChoices\\ConsentLog\\UI\\ConsentLogExport' => __DIR__ . '/../..' . '/src/ConsentLog/UI/ConsentLogExport.php',
+        'ItalyCookieChoices\\ConsentLog\\UI\\LogScript' => __DIR__ . '/../..' . '/src/ConsentLog/UI/LogScript.php',
+        'ItalyCookieChoices\\ConsentLog\\UI\\LogTableInstaller' => __DIR__ . '/../..' . '/src/ConsentLog/UI/LogTableInstaller.php',
+        'ItalyCookieChoices\\ConsentLog\\UI\\PrivacyPolicyText' => __DIR__ . '/../..' . '/src/ConsentLog/UI/PrivacyPolicyText.php',
+        'ItalyCookieChoices\\ConsentLog\\UI\\RetentionCleanup' => __DIR__ . '/../..' . '/src/ConsentLog/UI/RetentionCleanup.php',
+        'ItalyCookieChoices\\Consent\\Application\\BuildingConsentPolicy' => __DIR__ . '/../..' . '/src/Consent/Application/BuildingConsentPolicy.php',
+        'ItalyCookieChoices\\Consent\\Application\\ConsentPolicyFactory' => __DIR__ . '/../..' . '/src/Consent/Application/ConsentPolicyFactory.php',
+        'ItalyCookieChoices\\Consent\\Domain\\Categories' => __DIR__ . '/../..' . '/src/Consent/Domain/Categories.php',
+        'ItalyCookieChoices\\Consent\\Domain\\Category' => __DIR__ . '/../..' . '/src/Consent/Domain/Category.php',
+        'ItalyCookieChoices\\Consent\\Domain\\Consent' => __DIR__ . '/../..' . '/src/Consent/Domain/Consent.php',
+        'ItalyCookieChoices\\Consent\\Domain\\ConsentDuration' => __DIR__ . '/../..' . '/src/Consent/Domain/ConsentDuration.php',
+        'ItalyCookieChoices\\Consent\\Domain\\ConsentPolicy' => __DIR__ . '/../..' . '/src/Consent/Domain/ConsentPolicy.php',
+        'ItalyCookieChoices\\Consent\\Domain\\ConsentRepository' => __DIR__ . '/../..' . '/src/Consent/Domain/ConsentRepository.php',
+        'ItalyCookieChoices\\Consent\\Domain\\PolicyVersion' => __DIR__ . '/../..' . '/src/Consent/Domain/PolicyVersion.php',
+        'ItalyCookieChoices\\Consent\\Infrastructure\\CookieConsentRepository' => __DIR__ . '/../..' . '/src/Consent/Infrastructure/CookieConsentRepository.php',
+        'ItalyCookieChoices\\Consent\\Module' => __DIR__ . '/../..' . '/src/Consent/Module.php',
+        'ItalyCookieChoices\\Consent\\UI\\AcceptButtonShortcode' => __DIR__ . '/../..' . '/src/Consent/UI/AcceptButtonShortcode.php',
+        'ItalyCookieChoices\\Consent\\UI\\Banner' => __DIR__ . '/../..' . '/src/Consent/UI/Banner.php',
+        'ItalyCookieChoices\\Consent\\UI\\BannerPreviewEndpoint' => __DIR__ . '/../..' . '/src/Consent/UI/BannerPreviewEndpoint.php',
+        'ItalyCookieChoices\\Consent\\UI\\BuildingBanner' => __DIR__ . '/../..' . '/src/Consent/UI/BuildingBanner.php',
+        'ItalyCookieChoices\\Consent\\UI\\ConsentScript' => __DIR__ . '/../..' . '/src/Consent/UI/ConsentScript.php',
+        'ItalyCookieChoices\\Consent\\UI\\ConsentTexts' => __DIR__ . '/../..' . '/src/Consent/UI/ConsentTexts.php',
+        'ItalyCookieChoices\\Consent\\UI\\HasConsentFilter' => __DIR__ . '/../..' . '/src/Consent/UI/HasConsentFilter.php',
+        'ItalyCookieChoices\\Consent\\UI\\PreferencesButton' => __DIR__ . '/../..' . '/src/Consent/UI/PreferencesButton.php',
+        'ItalyCookieChoices\\Consent\\UI\\PreferencesButtonBlock' => __DIR__ . '/../..' . '/src/Consent/UI/PreferencesButtonBlock.php',
+        'ItalyCookieChoices\\Consent\\UI\\PreferencesShortcode' => __DIR__ . '/../..' . '/src/Consent/UI/PreferencesShortcode.php',
+        'ItalyCookieChoices\\I18n\\TextDomain' => __DIR__ . '/../..' . '/src/I18n/TextDomain.php',
+        'ItalyCookieChoices\\Integrations\\Application\\BuildingConsentMode' => __DIR__ . '/../..' . '/src/Integrations/Application/BuildingConsentMode.php',
+        'ItalyCookieChoices\\Integrations\\Application\\ConsentModeMapping' => __DIR__ . '/../..' . '/src/Integrations/Application/ConsentModeMapping.php',
+        'ItalyCookieChoices\\Integrations\\Application\\IntegrationSettings' => __DIR__ . '/../..' . '/src/Integrations/Application/IntegrationSettings.php',
+        'ItalyCookieChoices\\Integrations\\Domain\\GoogleConsentType' => __DIR__ . '/../..' . '/src/Integrations/Domain/GoogleConsentType.php',
+        'ItalyCookieChoices\\Integrations\\Module' => __DIR__ . '/../..' . '/src/Integrations/Module.php',
+        'ItalyCookieChoices\\Integrations\\UI\\AdvancedConsentMode' => __DIR__ . '/../..' . '/src/Integrations/UI/AdvancedConsentMode.php',
+        'ItalyCookieChoices\\Integrations\\UI\\ConsentModeScript' => __DIR__ . '/../..' . '/src/Integrations/UI/ConsentModeScript.php',
+        'ItalyCookieChoices\\Integrations\\UI\\TrackingTags' => __DIR__ . '/../..' . '/src/Integrations/UI/TrackingTags.php',
+        'ItalyCookieChoices\\Integrations\\UI\\YouTubeNoCookie' => __DIR__ . '/../..' . '/src/Integrations/UI/YouTubeNoCookie.php',
+        'ItalyCookieChoices\\Legacy\\DeprecatedHooks' => __DIR__ . '/../..' . '/src/Legacy/DeprecatedHooks.php',
+        'ItalyCookieChoices\\Module' => __DIR__ . '/../..' . '/src/Module.php',
+        'ItalyCookieChoices\\PluginLoaded' => __DIR__ . '/../..' . '/src/PluginLoaded.php',
+        'ItalyCookieChoices\\Settings\\LegacySnippets' => __DIR__ . '/../..' . '/src/Settings/LegacySnippets.php',
+        'ItalyCookieChoices\\Settings\\Migration' => __DIR__ . '/../..' . '/src/Settings/Migration.php',
+        'ItalyCookieChoices\\Settings\\Module' => __DIR__ . '/../..' . '/src/Settings/Module.php',
+        'ItalyCookieChoices\\Settings\\Options' => __DIR__ . '/../..' . '/src/Settings/Options.php',
+        'ItalyCookieChoices\\Settings\\Registration' => __DIR__ . '/../..' . '/src/Settings/Registration.php',
+        'ItalyCookieChoices\\Settings\\Sanitizer' => __DIR__ . '/../..' . '/src/Settings/Sanitizer.php',
+        'ItalyCookieChoices\\Settings\\Schema' => __DIR__ . '/../..' . '/src/Settings/Schema.php',
+        'ItalyCookieChoices\\Settings\\StringTranslations' => __DIR__ . '/../..' . '/src/Settings/StringTranslations.php',
+        'ItalyCookieChoices\\Settings\\TranslatingText' => __DIR__ . '/../..' . '/src/Settings/TranslatingText.php',
+        'ItalyCookieChoices\\Settings\\UI\\ImportEndpoint' => __DIR__ . '/../..' . '/src/Settings/UI/ImportEndpoint.php',
+        'ItalyCookieChoices\\Settings\\UI\\PluginActionLinks' => __DIR__ . '/../..' . '/src/Settings/UI/PluginActionLinks.php',
+        'ItalyCookieChoices\\Settings\\UI\\SettingsPage' => __DIR__ . '/../..' . '/src/Settings/UI/SettingsPage.php',
+        'ItalyCookieChoices\\Settings\\UI\\StringRegistration' => __DIR__ . '/../..' . '/src/Settings/UI/StringRegistration.php',
+        'ItalyCookieChoices\\Vendor\\Auryn\\CachingReflector' => __DIR__ . '/..' . '/overclokk/auryn/lib/CachingReflector.php',
+        'ItalyCookieChoices\\Vendor\\Auryn\\ConfigException' => __DIR__ . '/..' . '/overclokk/auryn/lib/ConfigException.php',
+        'ItalyCookieChoices\\Vendor\\Auryn\\Executable' => __DIR__ . '/..' . '/overclokk/auryn/lib/Executable.php',
+        'ItalyCookieChoices\\Vendor\\Auryn\\InjectionException' => __DIR__ . '/..' . '/overclokk/auryn/lib/InjectionException.php',
+        'ItalyCookieChoices\\Vendor\\Auryn\\Injector' => __DIR__ . '/..' . '/overclokk/auryn/lib/Injector.php',
+        'ItalyCookieChoices\\Vendor\\Auryn\\InjectorException' => __DIR__ . '/..' . '/overclokk/auryn/lib/InjectorException.php',
+        'ItalyCookieChoices\\Vendor\\Auryn\\ReflectionCache' => __DIR__ . '/..' . '/overclokk/auryn/lib/ReflectionCache.php',
+        'ItalyCookieChoices\\Vendor\\Auryn\\ReflectionCacheApc' => __DIR__ . '/..' . '/overclokk/auryn/lib/ReflectionCacheApc.php',
+        'ItalyCookieChoices\\Vendor\\Auryn\\ReflectionCacheArray' => __DIR__ . '/..' . '/overclokk/auryn/lib/ReflectionCacheArray.php',
+        'ItalyCookieChoices\\Vendor\\Auryn\\Reflector' => __DIR__ . '/..' . '/overclokk/auryn/lib/Reflector.php',
+        'ItalyCookieChoices\\Vendor\\Auryn\\StandardReflector' => __DIR__ . '/..' . '/overclokk/auryn/lib/StandardReflector.php',
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\AccessValueInArrayWithNotationTrait' => __DIR__ . '/..' . '/italystrap/config/src/AccessValueInArrayWithNotationTrait.php',
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\ArrayObjectTrait' => __DIR__ . '/..' . '/italystrap/config/src/ArrayObjectTrait.php',
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\Config' => __DIR__ . '/..' . '/italystrap/config/src/Config.php',
@@ -59,6 +185,48 @@ class ComposerStaticInit58ed27c25b294aed6967981e7e3ded4a
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\DeprecatedTrait' => __DIR__ . '/..' . '/italystrap/config/legacy/DeprecatedTrait.php',
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\NodeManipulationInterface' => __DIR__ . '/..' . '/italystrap/config/src/NodeManipulationInterface.php',
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\SignalCode' => __DIR__ . '/..' . '/italystrap/config/src/SignalCode.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\AurynConfig' => __DIR__ . '/..' . '/italystrap/empress/src/AurynConfig.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\AurynConfigInterface' => __DIR__ . '/..' . '/italystrap/empress/src/AurynConfigInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\ConfigReplacementTrait' => __DIR__ . '/..' . '/italystrap/empress/src/ConfigReplacementTrait.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\Container' => __DIR__ . '/..' . '/italystrap/empress/src/Container.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\ContainerBuilder' => __DIR__ . '/..' . '/italystrap/empress/src/ContainerBuilder.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\ContainerException' => __DIR__ . '/..' . '/italystrap/empress/src/ContainerException.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\Extension' => __DIR__ . '/..' . '/italystrap/empress/src/Extension.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\ModuleInterface' => __DIR__ . '/..' . '/italystrap/empress/src/ModuleInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\NotFoundException' => __DIR__ . '/..' . '/italystrap/empress/src/NotFoundException.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\PhpFileProvider' => __DIR__ . '/..' . '/italystrap/empress/src/PhpFileProvider.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\ProvidersCache' => __DIR__ . '/..' . '/italystrap/empress/src/ProvidersCache.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\ProvidersCacheInterface' => __DIR__ . '/..' . '/italystrap/empress/src/ProvidersCacheInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\ProvidersCollection' => __DIR__ . '/..' . '/italystrap/empress/src/ProvidersCollection.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\ProxyFactory' => __DIR__ . '/..' . '/italystrap/empress/src/ProxyFactory.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\ProxyFactoryInterface' => __DIR__ . '/..' . '/italystrap/empress/src/ProxyFactoryInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\DebugDispatcher' => __DIR__ . '/..' . '/italystrap/event/src/DebugDispatcher.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\Dispatcher' => __DIR__ . '/..' . '/italystrap/event/src/Dispatcher.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\EventSubscription' => __DIR__ . '/..' . '/italystrap/event/src/EventSubscription.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\GlobalDispatcher' => __DIR__ . '/..' . '/italystrap/event/src/GlobalDispatcher.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\GlobalDispatcherInterface' => __DIR__ . '/..' . '/italystrap/event/src/GlobalDispatcherInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\GlobalOrderedListenerProvider' => __DIR__ . '/..' . '/italystrap/event/src/GlobalOrderedListenerProvider.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\GlobalState' => __DIR__ . '/..' . '/italystrap/event/src/GlobalState.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\LegacyEventDispatcherMethodsDeprecatedTrait' => __DIR__ . '/..' . '/italystrap/event/src/LegacyEventDispatcherMethodsDeprecatedTrait.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\ListenerRegisterInterface' => __DIR__ . '/..' . '/italystrap/event/src/ListenerRegisterInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\ListenerRegisterTrait' => __DIR__ . '/..' . '/italystrap/event/src/ListenerRegisterTrait.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\Module' => __DIR__ . '/..' . '/italystrap/event/src/Module.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\NullState' => __DIR__ . '/..' . '/italystrap/event/src/NullState.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\PropagationAwareTrait' => __DIR__ . '/..' . '/italystrap/event/src/PropagationAwareTrait.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\StateInterface' => __DIR__ . '/..' . '/italystrap/event/src/StateInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\SubscriberInterface' => __DIR__ . '/..' . '/italystrap/event/src/SubscriberInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\SubscriberRegister' => __DIR__ . '/..' . '/italystrap/event/src/SubscriberRegister.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\SubscriberRegisterInterface' => __DIR__ . '/..' . '/italystrap/event/src/SubscriberRegisterInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\SubscribersConfigExtension' => __DIR__ . '/..' . '/italystrap/event/src/SubscribersConfigExtension.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\Exceptions\\FileNotFoundException' => __DIR__ . '/..' . '/italystrap/finder/src/Exceptions/FileNotFoundException.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\Exceptions\\InvalidStateException' => __DIR__ . '/..' . '/italystrap/finder/src/Exceptions/InvalidStateException.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\FileInfoFactory' => __DIR__ . '/..' . '/italystrap/finder/src/FileInfoFactory.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\FileInfoFactoryInterface' => __DIR__ . '/..' . '/italystrap/finder/src/FileInfoFactoryInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\FilesHierarchyIterator' => __DIR__ . '/..' . '/italystrap/finder/src/FilesHierarchyIterator.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\Finder' => __DIR__ . '/..' . '/italystrap/finder/src/Finder.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\FinderFactory' => __DIR__ . '/..' . '/italystrap/finder/src/FinderFactory.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\FinderInterface' => __DIR__ . '/..' . '/italystrap/finder/src/FinderInterface.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\SearchFileStrategy' => __DIR__ . '/..' . '/italystrap/finder/src/SearchFileStrategy.php',
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\BinaryCacheDecorator' => __DIR__ . '/..' . '/italystrap/storage/src/BinaryCacheDecorator.php',
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\Cache' => __DIR__ . '/..' . '/italystrap/storage/src/Cache.php',
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\CacheInterface' => __DIR__ . '/..' . '/italystrap/common/storage/CacheInterface.php',
@@ -73,19 +241,39 @@ class ComposerStaticInit58ed27c25b294aed6967981e7e3ded4a
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\StoreInterface' => __DIR__ . '/..' . '/italystrap/common/storage/StoreInterface.php',
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\Transient' => __DIR__ . '/..' . '/italystrap/storage/src/Transient.php',
         'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\ValidateKeyLength' => __DIR__ . '/..' . '/italystrap/storage/src/ValidateKeyLength.php',
-        'ItalyCookieChoices\\Vendor\\Overclokk\\Cookie\\Cookie' => __DIR__ . '/..' . '/overclokk/cookie/src/Cookie.php',
-        'ItalyCookieChoices\\Vendor\\Overclokk\\Cookie\\Cookie_Interface' => __DIR__ . '/..' . '/overclokk/cookie/src/Cookie_Interface.php',
-        'Italy_Cookie_Choices\\Admin\\Sanitize' => __DIR__ . '/../..' . '/legacy/admin/Sanitize.php',
-        'Italy_Cookie_Choices\\Admin\\Settings' => __DIR__ . '/../..' . '/legacy/admin/Settings.php',
-        'Italy_Cookie_Choices\\Core\\Cookie_Choices' => __DIR__ . '/../..' . '/legacy/core/Cookie_Choices.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\View\\View' => __DIR__ . '/..' . '/italystrap/view/src/View.php',
+        'ItalyCookieChoices\\Vendor\\ItalyStrap\\View\\ViewInterface' => __DIR__ . '/..' . '/italystrap/view/src/ViewInterface.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/psr/event-dispatcher/src/EventDispatcherInterface.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\EventDispatcher\\ListenerProviderInterface' => __DIR__ . '/..' . '/psr/event-dispatcher/src/ListenerProviderInterface.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\EventDispatcher\\StoppableEventInterface' => __DIR__ . '/..' . '/psr/event-dispatcher/src/StoppableEventInterface.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\LoggerAwareInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareInterface.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\LoggerAwareTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareTrait.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerInterface.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerTrait.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'ItalyCookieChoices\\Vendor\\Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
+        'ItalyCookieChoices\\Vendor\\Webimpress\\SafeWriter\\Exception\\ChmodException' => __DIR__ . '/..' . '/webimpress/safe-writer/src/Exception/ChmodException.php',
+        'ItalyCookieChoices\\Vendor\\Webimpress\\SafeWriter\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/webimpress/safe-writer/src/Exception/ExceptionInterface.php',
+        'ItalyCookieChoices\\Vendor\\Webimpress\\SafeWriter\\Exception\\RenameException' => __DIR__ . '/..' . '/webimpress/safe-writer/src/Exception/RenameException.php',
+        'ItalyCookieChoices\\Vendor\\Webimpress\\SafeWriter\\Exception\\RuntimeException' => __DIR__ . '/..' . '/webimpress/safe-writer/src/Exception/RuntimeException.php',
+        'ItalyCookieChoices\\Vendor\\Webimpress\\SafeWriter\\Exception\\WriteContentException' => __DIR__ . '/..' . '/webimpress/safe-writer/src/Exception/WriteContentException.php',
+        'ItalyCookieChoices\\Vendor\\Webimpress\\SafeWriter\\FileWriter' => __DIR__ . '/..' . '/webimpress/safe-writer/src/FileWriter.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit58ed27c25b294aed6967981e7e3ded4a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit58ed27c25b294aed6967981e7e3ded4a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit58ed27c25b294aed6967981e7e3ded4a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcda05f80d82cdf5b46c714ccca9f150f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcda05f80d82cdf5b46c714ccca9f150f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitcda05f80d82cdf5b46c714ccca9f150f::$classMap;
 
         }, null, ClassLoader::class);
     }

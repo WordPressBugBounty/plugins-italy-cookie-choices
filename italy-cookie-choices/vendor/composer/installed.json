@@ -59,17 +59,17 @@
         },
         {
             "name": "italystrap\/config",
-            "version": "2.11.1",
-            "version_normalized": "2.11.1.0",
+            "version": "2.11.2",
+            "version_normalized": "2.11.2.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/ItalyStrap\/config.git",
-                "reference": "ac014c305ee3bf986d3c4280dbb7cea34a31b27c"
+                "reference": "0de9ee385237d63a28a90d8965e484f3f98734f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/ItalyStrap\/config\/zipball\/ac014c305ee3bf986d3c4280dbb7cea34a31b27c",
-                "reference": "ac014c305ee3bf986d3c4280dbb7cea34a31b27c",
+                "url": "https:\/\/api.github.com\/repos\/ItalyStrap\/config\/zipball\/0de9ee385237d63a28a90d8965e484f3f98734f0",
+                "reference": "0de9ee385237d63a28a90d8965e484f3f98734f0",
                 "shasum": ""
             },
             "require": {
@@ -96,7 +96,7 @@
                 "squizlabs\/php_codesniffer": "^3.7",
                 "vimeo\/psalm": "^4.26"
             },
-            "time": "2026-10-05T04:55:04+00:00",
+            "time": "2026-10-21T08:40:41+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -129,6 +129,259 @@
                 "source": "https:\/\/github.com\/ItalyStrap\/config"
             },
             "install-path": "..\/italystrap\/config"
+        },
+        {
+            "name": "italystrap\/empress",
+            "version": "dev-modularized",
+            "version_normalized": "dev-modularized",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/ItalyStrap\/empress.git",
+                "reference": "50884bc513daeaea93df37ada6d7230a3ef41f23"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/ItalyStrap\/empress\/zipball\/50884bc513daeaea93df37ada6d7230a3ef41f23",
+                "reference": "50884bc513daeaea93df37ada6d7230a3ef41f23",
+                "shasum": ""
+            },
+            "require": {
+                "italystrap\/config": "^2.11",
+                "overclokk\/auryn": "dev-master",
+                "php": ">=7.4",
+                "psr\/container": "^1.1 || ^2.0",
+                "webimpress\/safe-writer": "^2.2"
+            },
+            "require-dev": {
+                "behat\/gherkin": ">=4.4 <4.11",
+                "brick\/varexporter": "^0.3.8 || ^0.5",
+                "codeception\/module-asserts": "^1.0",
+                "crellbar\/prophecy-extensions": "^1.1",
+                "dealerdirect\/phpcodesniffer-composer-installer": "^1.0",
+                "friendsofphp\/proxy-manager-lts": "^1.0",
+                "infection\/codeception-adapter": "^0.4.1",
+                "infection\/infection": "^0.26.6",
+                "italystrap\/debug": "dev-master",
+                "italystrap\/finder": "dev-master",
+                "laminas\/laminas-config-aggregator": "^1.9",
+                "lucatume\/function-mocker-le": "^1.0.1",
+                "lucatume\/wp-browser": ">=3.2.3 <3.5",
+                "phpbench\/phpbench": "^1.2",
+                "phpcompatibility\/php-compatibility": "^9.3",
+                "phpmetrics\/phpmetrics": "^2.8",
+                "phpspec\/prophecy-phpunit": "^2.0",
+                "phpstan\/phpstan": "^1.12",
+                "rector\/rector": "^1.2",
+                "rector\/swiss-knife": "^2.3",
+                "squizlabs\/php_codesniffer": "^3.7"
+            },
+            "suggest": {
+                "brick\/varexporter": "Only if you want to write the providers cache with ProvidersCache (^0.3.8 || ^0.5)",
+                "elazar\/auryn-container-interop": "Only if you want to add a psr\/container adapter, not required for this package",
+                "friendsofphp\/proxy-manager-lts": "Only if you want to add support for lazy loading classes",
+                "northwoods\/container": "Only if you want to add a psr\/container adapter, not required for this package"
+            },
+            "time": "2026-10-21T19:16:37+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "namespace-bc-aliases.php"
+                ],
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\": [
+                        "src\/"
+                    ]
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overclokk",
+                    "email": "info@overclokk.net",
+                    "homepage": "https:\/\/www.italystrap.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Config driven for Auryn Injector the OOP way",
+            "support": {
+                "issues": "https:\/\/github.com\/ItalyStrap\/empress\/issues",
+                "source": "https:\/\/github.com\/ItalyStrap\/empress"
+            },
+            "install-path": "..\/italystrap\/empress"
+        },
+        {
+            "name": "italystrap\/event",
+            "version": "0.2.2",
+            "version_normalized": "0.2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/ItalyStrap\/event.git",
+                "reference": "39cf142101121538d6282df7c3facd0cc3253352"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/ItalyStrap\/event\/zipball\/39cf142101121538d6282df7c3facd0cc3253352",
+                "reference": "39cf142101121538d6282df7c3facd0cc3253352",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "psr\/event-dispatcher": "^1.0",
+                "psr\/log": "^1.1"
+            },
+            "provide": {
+                "psr\/event-dispatcher-implementation": "1.0"
+            },
+            "require-dev": {
+                "codeception\/module-asserts": "^1.0",
+                "crell\/tukio": "^1.0",
+                "dealerdirect\/phpcodesniffer-composer-installer": "^1.0",
+                "fig\/event-dispatcher-util": "^1.3",
+                "humanmade\/psalm-plugin-wordpress": "^3.0.0-alpha1",
+                "infection\/codeception-adapter": "^0.4.1",
+                "infection\/infection": "^0.26.6",
+                "inpsyde\/object-hooks-remover": "^0.1",
+                "inpsyde\/wp-stubs": "dev-main",
+                "italystrap\/config": "^2.2",
+                "italystrap\/debug": "dev-master",
+                "italystrap\/empress": "dev-master",
+                "lucatume\/function-mocker-le": "^1.0",
+                "lucatume\/wp-browser": "<3.5",
+                "phpbench\/phpbench": "^1.2",
+                "phpcompatibility\/php-compatibility": "^9.3",
+                "phpmetrics\/phpmetrics": "^2.8",
+                "phpspec\/prophecy-phpunit": "^2.0",
+                "psr\/container": "^1.0",
+                "rector\/rector": "^0.15.17",
+                "squizlabs\/php_codesniffer": "^3.7",
+                "vimeo\/psalm": "^5.6"
+            },
+            "suggest": {
+                "inpsyde\/objects-hooks-remover": "Package to remove WordPress hook callbacks that uses object methods or closures.",
+                "italystrap\/empress": "Config driven for Auryn Injector the OOP way"
+            },
+            "time": "2026-10-15T10:12:04+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "namespace-bc-aliases.php"
+                ],
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\": "src\/",
+                    "ItalyCookieChoices\\Vendor\\ItalyStrap\\PsrDispatcher\\": "tests\/_data\/experiment\/PsrDispatcher\/"
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Enea Overclokk",
+                    "email": "info@overclokk.net",
+                    "homepage": "https:\/\/www.italystrap.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "WordPress and Psr-14 Event API the OOP way",
+            "keywords": [
+                "HOOK",
+                "event",
+                "events",
+                "hooks",
+                "plugin API",
+                "psr",
+                "psr-14",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https:\/\/github.com\/ItalyStrap\/event\/issues",
+                "source": "https:\/\/github.com\/ItalyStrap\/event"
+            },
+            "install-path": "..\/italystrap\/event"
+        },
+        {
+            "name": "italystrap\/finder",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/ItalyStrap\/finder.git",
+                "reference": "b31f7aceeeeca25a5cf25247a65d9b85d493bcb5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/ItalyStrap\/finder\/zipball\/b31f7aceeeeca25a5cf25247a65d9b85d493bcb5",
+                "reference": "b31f7aceeeeca25a5cf25247a65d9b85d493bcb5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "brianium\/paratest": "^4.0",
+                "codeception\/c3": "2.*",
+                "codeception\/module-asserts": "^1.0",
+                "codeception\/module-cli": "^1.0",
+                "codeception\/module-db": "^1.0",
+                "codeception\/module-filesystem": "^1.0",
+                "codeception\/module-phpbrowser": "^1.0",
+                "codeception\/module-webdriver": "^1.0",
+                "codeception\/util-universalframework": "^1.0",
+                "dealerdirect\/phpcodesniffer-composer-installer": "^0.7",
+                "infection\/infection": "^0.15.3",
+                "italystrap\/debug": "^2.0",
+                "lucatume\/function-mocker-le": "^1.0",
+                "lucatume\/wp-browser": "^2.4",
+                "nunomaduro\/phpinsights": "^1.14.0",
+                "phpbench\/phpbench": "@dev",
+                "phpcompatibility\/php-compatibility": "*",
+                "phpmetrics\/phpmetrics": "^2.5",
+                "phpspec\/prophecy-phpunit": "^1.1",
+                "phpstan\/phpstan": "^0.11.16",
+                "squizlabs\/php_codesniffer": "*",
+                "szepeviktor\/phpstan-wordpress": "^0.3.0",
+                "vimeo\/psalm": "^3.9"
+            },
+            "time": "2025-10-29T06:55:41+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "functions\/autoload.php"
+                ],
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\": "src\/"
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Enea Overclokk",
+                    "email": "info@overclokk.net",
+                    "homepage": "https:\/\/www.italystrap.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A file finder for PHP the OOP way",
+            "keywords": [
+                "file finder",
+                "finder"
+            ],
+            "support": {
+                "issues": "https:\/\/github.com\/ItalyStrap\/finder\/issues",
+                "source": "https:\/\/github.com\/ItalyStrap\/finder"
+            },
+            "install-path": "..\/italystrap\/finder"
         },
         {
             "name": "italystrap\/storage",
@@ -204,99 +457,389 @@
             "install-path": "..\/italystrap\/storage"
         },
         {
-            "name": "overclokk\/cookie",
-            "version": "v1.0.2",
-            "version_normalized": "1.0.2.0",
+            "name": "italystrap\/view",
+            "version": "1.1.3",
+            "version_normalized": "1.1.3.0",
             "source": {
                 "type": "git",
-                "url": "https:\/\/github.com\/overclokk\/cookie.git",
-                "reference": "d546068cb4042d35ca121ae50996d536c641f8e3"
+                "url": "https:\/\/github.com\/ItalyStrap\/view.git",
+                "reference": "3ee26a12132407f1cc6e339a9da98a1c8bc9857d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/overclokk\/cookie\/zipball\/d546068cb4042d35ca121ae50996d536c641f8e3",
-                "reference": "d546068cb4042d35ca121ae50996d536c641f8e3",
+                "url": "https:\/\/api.github.com\/repos\/ItalyStrap\/view\/zipball\/3ee26a12132407f1cc6e339a9da98a1c8bc9857d",
+                "reference": "3ee26a12132407f1cc6e339a9da98a1c8bc9857d",
                 "shasum": ""
             },
-            "require-dev": {
-                "lucatume\/wp-browser": "^1.19"
+            "require": {
+                "italystrap\/config": "^2.1",
+                "italystrap\/finder": "dev-master",
+                "php": ">=7.2"
             },
-            "time": "2018-02-17T15:45:52+00:00",
+            "require-dev": {
+                "brianium\/paratest": "^4.0",
+                "codeception\/c3": "2.*",
+                "codeception\/module-asserts": "^1.0",
+                "codeception\/module-cli": "^1.0",
+                "codeception\/module-db": "^1.0",
+                "codeception\/module-filesystem": "^1.0",
+                "codeception\/module-phpbrowser": "^1.0",
+                "codeception\/module-webdriver": "^1.0",
+                "codeception\/util-universalframework": "^1.0",
+                "dealerdirect\/phpcodesniffer-composer-installer": "^0.5.0",
+                "infection\/infection": "^0.15.3",
+                "italystrap\/debug": "^2.0",
+                "lucatume\/function-mocker-le": "^1.0",
+                "lucatume\/wp-browser": "^2.4",
+                "nunomaduro\/phpinsights": "^1.14.0",
+                "phpbench\/phpbench": "@dev",
+                "phpcompatibility\/php-compatibility": "*",
+                "phpmetrics\/phpmetrics": "^2.5",
+                "phpstan\/phpstan": "^0.11.16",
+                "squizlabs\/php_codesniffer": "*",
+                "szepeviktor\/phpstan-wordpress": "^0.3.0",
+                "vimeo\/psalm": "^3.9"
+            },
+            "time": "2025-10-28T08:55:20+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
+                "files": [
+                    "functions\/autoload.php"
+                ],
                 "psr-4": {
-                    "ItalyCookieChoices\\Vendor\\Overclokk\\Cookie\\": "src\/"
+                    "ItalyCookieChoices\\Vendor\\ItalyStrap\\View\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
             "license": [
-                "GPL-2.0+"
+                "MIT"
             ],
             "authors": [
                 {
-                    "name": "overclokk",
-                    "email": "info@overclokk.net"
+                    "name": "Enea Overclokk",
+                    "email": "info@overclokk.net",
+                    "homepage": "https:\/\/www.italystrap.com",
+                    "role": "Developer"
                 }
             ],
-            "description": "A simple and light cookie manager class",
+            "description": "View API for loading template parts and views the OOP way",
+            "keywords": [
+                "renderer",
+                "template",
+                "view"
+            ],
             "support": {
-                "issues": "https:\/\/github.com\/overclokk\/cookie\/issues",
-                "source": "https:\/\/github.com\/overclokk\/cookie\/tree\/master"
+                "issues": "https:\/\/github.com\/ItalyStrap\/view\/issues",
+                "source": "https:\/\/github.com\/ItalyStrap\/view"
             },
-            "install-path": "..\/overclokk\/cookie"
+            "install-path": "..\/italystrap\/view"
         },
         {
-            "name": "overclokk\/minimum-requirements",
+            "name": "overclokk\/auryn",
             "version": "dev-master",
             "version_normalized": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https:\/\/github.com\/overclokk\/minimum-requirements.git",
-                "reference": "aa2d35381209d8dbc4632e2f30c9ef5614feef00"
+                "url": "https:\/\/github.com\/overclokk\/auryn.git",
+                "reference": "9f849d59eaf7e54e8b467aac7dd5a75f769877e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/overclokk\/minimum-requirements\/zipball\/aa2d35381209d8dbc4632e2f30c9ef5614feef00",
-                "reference": "aa2d35381209d8dbc4632e2f30c9ef5614feef00",
+                "url": "https:\/\/api.github.com\/repos\/overclokk\/auryn\/zipball\/9f849d59eaf7e54e8b467aac7dd5a75f769877e4",
+                "reference": "9f849d59eaf7e54e8b467aac7dd5a75f769877e4",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2"
+                "php": ">=7.1"
+            },
+            "replace": {
+                "rdlowrey\/auryn": "^1.4"
             },
             "require-dev": {
-                "lucatume\/function-mocker": "^1.0",
-                "lucatume\/wp-browser": "^1.10"
+                "athletic\/athletic": "~0.1",
+                "friendsofphp\/php-cs-fixer": "^2",
+                "friendsofphp\/proxy-manager-lts": "^1.0",
+                "phpunit\/phpunit": "^7 || ^8"
             },
-            "time": "2018-12-24T09:07:01+00:00",
+            "suggest": {
+                "friendsofphp\/proxy-manager-lts": "Required for support for lazy-loading proxies."
+            },
+            "time": "2025-10-27T09:21:32+00:00",
             "default-branch": true,
-            "type": "wordpress-plugin",
+            "type": "library",
             "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\Auryn\\": "lib\/"
+                }
+            },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
             "license": [
-                "GPL-2.0+"
+                "MIT"
             ],
             "authors": [
                 {
-                    "name": "overclokk",
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@gmail.com",
+                    "homepage": "https:\/\/github.com\/rdlowrey",
+                    "role": "Creator \/ Main Developer"
+                },
+                {
+                    "name": "Levi Morrison",
+                    "email": "levim@php.net",
+                    "homepage": "http:\/\/morrisonlevi.github.com\/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Dan Ackroyd",
+                    "email": "Danack@basereality.com",
+                    "homepage": "http:\/\/www.basereality.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Enea Overclokk",
                     "email": "info@overclokk.net",
-                    "homepage": "http:\/\/www.overclokk.net",
+                    "homepage": "https:\/\/www.italystrap.com",
                     "role": "Developer"
                 }
             ],
-            "description": "Check the minimum requirements for your WordPress theme or plugin",
-            "homepage": "https:\/\/github.com\/overclokk\/minimum-requirements",
+            "description": "Fork of rdlowrey\/auryn with proxy support thanks to Ocramius\/ProxyManager|FriendsOfPHP\/proxy-manager-lts - Auryn is a dependency injector for bootstrapping object-oriented PHP applications.",
+            "homepage": "https:\/\/github.com\/overclokk\/auryn",
             "keywords": [
-                "plugin",
-                "wordpress",
-                "wordpress plugin"
+                "dependency injection",
+                "dic",
+                "ioc"
             ],
             "support": {
-                "issues": "https:\/\/github.com\/overclokk\/minimum-requirements\/issues",
-                "source": "https:\/\/github.com\/overclokk\/minimum-requirements\/tree\/1.0.1"
+                "issues": "https:\/\/github.com\/overclokk\/auryn\/issues",
+                "source": "https:\/\/github.com\/overclokk\/auryn"
             },
-            "abandoned": true,
-            "install-path": "..\/overclokk\/minimum-requirements"
+            "install-path": "..\/overclokk\/auryn"
+        },
+        {
+            "name": "psr\/container",
+            "version": "2.0.2",
+            "version_normalized": "2.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/php-fig\/container.git",
+                "reference": "c71ecc56dfe541dbd90c5360474fbc405f8d5963"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/php-fig\/container\/zipball\/c71ecc56dfe541dbd90c5360474fbc405f8d5963",
+                "reference": "c71ecc56dfe541dbd90c5360474fbc405f8d5963",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4.0"
+            },
+            "time": "2021-11-05T16:47:00+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\Psr\\Container\\": "src\/"
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https:\/\/www.php-fig.org\/"
+                }
+            ],
+            "description": "Common Container Interface (PHP FIG PSR-11)",
+            "homepage": "https:\/\/github.com\/php-fig\/container",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "container-interface",
+                "container-interop",
+                "psr"
+            ],
+            "support": {
+                "issues": "https:\/\/github.com\/php-fig\/container\/issues",
+                "source": "https:\/\/github.com\/php-fig\/container\/tree\/2.0.2"
+            },
+            "install-path": "..\/psr\/container"
+        },
+        {
+            "name": "psr\/event-dispatcher",
+            "version": "1.0.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/php-fig\/event-dispatcher.git",
+                "reference": "dbefd12671e8a14ec7f180cab83036ed26714bb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/php-fig\/event-dispatcher\/zipball\/dbefd12671e8a14ec7f180cab83036ed26714bb0",
+                "reference": "dbefd12671e8a14ec7f180cab83036ed26714bb0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "time": "2019-01-08T18:20:26+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\Psr\\EventDispatcher\\": "src\/"
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http:\/\/www.php-fig.org\/"
+                }
+            ],
+            "description": "Standard interfaces for event handling.",
+            "keywords": [
+                "events",
+                "psr",
+                "psr-14"
+            ],
+            "support": {
+                "issues": "https:\/\/github.com\/php-fig\/event-dispatcher\/issues",
+                "source": "https:\/\/github.com\/php-fig\/event-dispatcher\/tree\/1.0.0"
+            },
+            "install-path": "..\/psr\/event-dispatcher"
+        },
+        {
+            "name": "psr\/log",
+            "version": "1.1.4",
+            "version_normalized": "1.1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/php-fig\/log.git",
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/php-fig\/log\/zipball\/d49695b909c3b7628b6289db5479a1c204601f11",
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2021-05-03T11:20:27+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\Psr\\Log\\": "Psr\/Log\/"
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https:\/\/www.php-fig.org\/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https:\/\/github.com\/php-fig\/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "support": {
+                "source": "https:\/\/github.com\/php-fig\/log\/tree\/1.1.4"
+            },
+            "install-path": "..\/psr\/log"
+        },
+        {
+            "name": "webimpress\/safe-writer",
+            "version": "2.2.0",
+            "version_normalized": "2.2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/webimpress\/safe-writer.git",
+                "reference": "9d37cc8bee20f7cb2f58f6e23e05097eab5072e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/webimpress\/safe-writer\/zipball\/9d37cc8bee20f7cb2f58f6e23e05097eab5072e6",
+                "reference": "9d37cc8bee20f7cb2f58f6e23e05097eab5072e6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit\/phpunit": "^9.5.4",
+                "vimeo\/psalm": "^4.7",
+                "webimpress\/coding-standard": "^1.2.2"
+            },
+            "time": "2021-04-19T16:34:45+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev",
+                    "dev-develop": "2.3.x-dev",
+                    "dev-release-1.0": "1.0.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\Webimpress\\SafeWriter\\": "src\/"
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "Tool to write files safely, to avoid race conditions",
+            "keywords": [
+                "concurrent write",
+                "file writer",
+                "race condition",
+                "safe writer",
+                "webimpress"
+            ],
+            "support": {
+                "issues": "https:\/\/github.com\/webimpress\/safe-writer\/issues",
+                "source": "https:\/\/github.com\/webimpress\/safe-writer\/tree\/2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https:\/\/github.com\/michalbundyra",
+                    "type": "github"
+                }
+            ],
+            "install-path": "..\/webimpress\/safe-writer"
         }
     ],
     "dev": false,

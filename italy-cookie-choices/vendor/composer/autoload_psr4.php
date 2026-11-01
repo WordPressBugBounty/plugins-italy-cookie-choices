@@ -6,10 +6,17 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Italy_Cookie_Choices\\Core\\' => array($baseDir . '/legacy/core'),
-    'Italy_Cookie_Choices\\Admin\\' => array($baseDir . '/legacy/admin'),
-    'Italy_Cookie_Choices\\' => array($baseDir . '/src'),
-    'ItalyCookieChoices\\Vendor\\Overclokk\\Cookie\\' => array($vendorDir . '/overclokk/cookie/src'),
+    'ItalyCookieChoices\\Vendor\\Webimpress\\SafeWriter\\' => array($vendorDir . '/webimpress/safe-writer/src'),
+    'ItalyCookieChoices\\Vendor\\Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'ItalyCookieChoices\\Vendor\\Psr\\EventDispatcher\\' => array($vendorDir . '/psr/event-dispatcher/src'),
+    'ItalyCookieChoices\\Vendor\\Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'ItalyCookieChoices\\Vendor\\ItalyStrap\\View\\' => array($vendorDir . '/italystrap/view/src'),
     'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\' => array($vendorDir . '/italystrap/storage/src', $vendorDir . '/italystrap/common/storage'),
+    'ItalyCookieChoices\\Vendor\\ItalyStrap\\PsrDispatcher\\' => array($vendorDir . '/italystrap/event/tests/_data/experiment/PsrDispatcher'),
+    'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\' => array($vendorDir . '/italystrap/finder/src'),
+    'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\' => array($vendorDir . '/italystrap/event/src'),
+    'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\' => array($vendorDir . '/italystrap/empress/src'),
     'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\' => array($vendorDir . '/italystrap/config/src'),
+    'ItalyCookieChoices\\Vendor\\Auryn\\' => array($vendorDir . '/overclokk/auryn/lib'),
+    'ItalyCookieChoices\\' => array($baseDir . '/src'),
 );
