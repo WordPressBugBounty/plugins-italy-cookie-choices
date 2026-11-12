@@ -13,10 +13,12 @@ return array(
     'ItalyCookieChoices\\Vendor\\ItalyStrap\\View\\' => array($vendorDir . '/italystrap/view/src'),
     'ItalyCookieChoices\\Vendor\\ItalyStrap\\Storage\\' => array($vendorDir . '/italystrap/storage/src', $vendorDir . '/italystrap/common/storage'),
     'ItalyCookieChoices\\Vendor\\ItalyStrap\\PsrDispatcher\\' => array($vendorDir . '/italystrap/event/tests/_data/experiment/PsrDispatcher'),
+    'ItalyCookieChoices\\Vendor\\ItalyStrap\\Pipeline\\' => array($vendorDir . '/italystrap/pipeline/src'),
     'ItalyCookieChoices\\Vendor\\ItalyStrap\\Finder\\' => array($vendorDir . '/italystrap/finder/src'),
     'ItalyCookieChoices\\Vendor\\ItalyStrap\\Event\\' => array($vendorDir . '/italystrap/event/src'),
     'ItalyCookieChoices\\Vendor\\ItalyStrap\\Empress\\' => array($vendorDir . '/italystrap/empress/src'),
     'ItalyCookieChoices\\Vendor\\ItalyStrap\\Config\\' => array($vendorDir . '/italystrap/config/src'),
+    'ItalyCookieChoices\\Vendor\\ItalyStrap\\Asset\\' => array($vendorDir . '/italystrap/asset/src'),
     'ItalyCookieChoices\\Vendor\\Auryn\\' => array($vendorDir . '/overclokk/auryn/lib'),
     'ItalyCookieChoices\\' => array($baseDir . '/src'),
 );

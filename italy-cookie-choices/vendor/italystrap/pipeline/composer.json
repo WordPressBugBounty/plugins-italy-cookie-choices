@@ -1,0 +1,86 @@
+{
+    "name": "italystrap\/pipeline",
+    "description": "A lightweight middleware pipeline for PHP \u2014 chain handlers and middleware to process messages through a composable pipeline",
+    "keywords": [
+        "middleware",
+        "pipeline",
+        "handler",
+        "stack-handler"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Enea Overclokk",
+            "email": "info@overclokk.net",
+            "homepage": "https:\/\/www.italystrap.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.2"
+    },
+    "require-dev": {
+        "phpbench\/phpbench": "^1.6",
+        "phpstan\/phpstan": "^2.1",
+        "phpunit\/phpunit": "^11.0",
+        "rector\/rector": "^2.0",
+        "symplify\/easy-coding-standard": "^12.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "ItalyCookieChoices\\Vendor\\ItalyStrap\\Pipeline\\": "src\/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ItalyCookieChoices\\Vendor\\ItalyStrap\\Pipeline\\Tests\\": "tests\/src\/",
+            "ItalyCookieChoices\\Vendor\\ItalyStrap\\Pipeline\\Tests\\Unit\\": "tests\/unit\/",
+            "ItalyCookieChoices\\Vendor\\ItalyStrap\\Pipeline\\Tests\\Stubs\\": "tests\/stubs\/",
+            "ItalyCookieChoices\\Vendor\\ItalyStrap\\Pipeline\\Tests\\Benchmark\\": "tests\/benchmark\/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "@php vendor\/bin\/phpunit"
+        ],
+        "stan": [
+            "@php vendor\/bin\/phpstan analyse"
+        ],
+        "ecs": [
+            "@php vendor\/bin\/ecs check"
+        ],
+        "ecs:fix": [
+            "@php vendor\/bin\/ecs check --fix"
+        ],
+        "rector": [
+            "@php vendor\/bin\/rector process --dry-run"
+        ],
+        "rector:fix": [
+            "@php vendor\/bin\/rector process"
+        ],
+        "bench": [
+            "@php vendor\/bin\/phpbench run --report=stats"
+        ],
+        "bench:prev": [
+            "@php vendor\/bin\/phpbench run --report=stats --tag=original"
+        ],
+        "bench:compare:prev": [
+            "@php vendor\/bin\/phpbench run --report=stats --ref=original"
+        ],
+        "qa": [
+            "@ecs",
+            "@stan",
+            "@test"
+        ]
+    },
+    "support": {
+        "issues": "https:\/\/github.com\/ItalyStrap\/pipeline\/issues",
+        "source": "https:\/\/github.com\/ItalyStrap\/pipeline"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

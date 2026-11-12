@@ -1,6 +1,76 @@
 {
     "packages": [
         {
+            "name": "italystrap\/asset",
+            "version": "2.0.0",
+            "version_normalized": "2.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/ItalyStrap\/asset.git",
+                "reference": "690f61904d0a3f2fea32915464ab3b08cfa0f702"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/ItalyStrap\/asset\/zipball\/690f61904d0a3f2fea32915464ab3b08cfa0f702",
+                "reference": "690f61904d0a3f2fea32915464ab3b08cfa0f702",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "codeception\/codeception": "^5.3",
+                "codeception\/module-asserts": "^3.0",
+                "dealerdirect\/phpcodesniffer-composer-installer": "^1.2",
+                "infection\/codeception-adapter": "^0.4.3",
+                "infection\/infection": "^0.29",
+                "italystrap\/event": "^0.2.2",
+                "lucatume\/wp-browser": "^4.5",
+                "phpcompatibility\/php-compatibility": "^9.3",
+                "phpstan\/phpstan": "^2.3",
+                "rector\/rector": "^2.2",
+                "squizlabs\/php_codesniffer": "^3.13",
+                "szepeviktor\/phpstan-wordpress": "^2.0"
+            },
+            "suggest": {
+                "italystrap\/event": "Load the assets on their event with the AssetsSubscriber"
+            },
+            "time": "2026-11-11T07:18:02+00:00",
+            "published-time": "2026-11-11T07:19:24+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\ItalyStrap\\Asset\\": "src\/"
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Enea Overclokk",
+                    "email": "info@overclokk.net",
+                    "homepage": "https:\/\/www.italystrap.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Register and enqueue scripts and styles as value objects",
+            "keywords": [
+                "asset",
+                "enqueue",
+                "register",
+                "script",
+                "style"
+            ],
+            "support": {
+                "issues": "https:\/\/github.com\/ItalyStrap\/asset\/issues",
+                "source": "https:\/\/github.com\/ItalyStrap\/asset"
+            },
+            "install-path": "..\/italystrap\/asset"
+        },
+        {
             "name": "italystrap\/common",
             "version": "1.0.1",
             "version_normalized": "1.0.1.0",
@@ -382,6 +452,65 @@
                 "source": "https:\/\/github.com\/ItalyStrap\/finder"
             },
             "install-path": "..\/italystrap\/finder"
+        },
+        {
+            "name": "italystrap\/pipeline",
+            "version": "1.0.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/ItalyStrap\/pipeline.git",
+                "reference": "dd3b0ce386600c944222ddb965904c4d53d5dd8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/ItalyStrap\/pipeline\/zipball\/dd3b0ce386600c944222ddb965904c4d53d5dd8c",
+                "reference": "dd3b0ce386600c944222ddb965904c4d53d5dd8c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "phpbench\/phpbench": "^1.6",
+                "phpstan\/phpstan": "^2.1",
+                "phpunit\/phpunit": "^11.0",
+                "rector\/rector": "^2.0",
+                "symplify\/easy-coding-standard": "^12.5"
+            },
+            "time": "2026-04-07T14:28:28+00:00",
+            "published-time": "2026-11-11T10:16:32+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ItalyCookieChoices\\Vendor\\ItalyStrap\\Pipeline\\": "src\/"
+                }
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Enea Overclokk",
+                    "email": "info@overclokk.net",
+                    "homepage": "https:\/\/www.italystrap.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A lightweight middleware pipeline for PHP \u2014 chain handlers and middleware to process messages through a composable pipeline",
+            "keywords": [
+                "handler",
+                "middleware",
+                "pipeline",
+                "stack-handler"
+            ],
+            "support": {
+                "issues": "https:\/\/github.com\/ItalyStrap\/pipeline\/issues",
+                "source": "https:\/\/github.com\/ItalyStrap\/pipeline"
+            },
+            "install-path": "..\/italystrap\/pipeline"
         },
         {
             "name": "italystrap\/storage",

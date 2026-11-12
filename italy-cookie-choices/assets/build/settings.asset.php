@@ -3,7 +3,8 @@
 		'wp-api-fetch',
 		'wp-components',
 		'wp-element',
-		'wp-i18n'
+		'wp-i18n',
+		'wp-media-utils'
 	),
-	'version' => '58da8ebb9b86cbe60785'
+	'version' => 'ca4be329f7f4301e2c72'
 );

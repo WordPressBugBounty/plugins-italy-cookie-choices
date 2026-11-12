@@ -6,8 +6,14 @@ namespace ItalyCookieChoices\ConsentLog;
 
 use ItalyCookieChoices\ConsentLog\Domain\ConsentLog;
 use ItalyCookieChoices\ConsentLog\Infrastructure\DatabaseConsentLog;
+use ItalyCookieChoices\Console\Commands\CommandsConfigExtension;
+use ItalyCookieChoices\ConsentLog\UI\Cli\Commands\LogExportCommand;
+use ItalyCookieChoices\ConsentLog\UI\Cli\Commands\LogNamespace;
+use ItalyCookieChoices\ConsentLog\UI\Cli\Commands\LogPurgeCommand;
 use ItalyCookieChoices\ConsentLog\UI\ConsentLogEndpoint;
 use ItalyCookieChoices\ConsentLog\UI\ConsentLogExport;
+use ItalyCookieChoices\ConsentLog\UI\ConsentStatisticsAbility;
+use ItalyCookieChoices\ConsentLog\UI\ConsentStatisticsEndpoint;
 use ItalyCookieChoices\ConsentLog\UI\LogScript;
 use ItalyCookieChoices\ConsentLog\UI\LogTableInstaller;
 use ItalyCookieChoices\ConsentLog\UI\PrivacyPolicyText;
@@ -17,7 +23,7 @@ use ItalyCookieChoices\Vendor\ItalyStrap\Empress\ModuleInterface;
 use ItalyCookieChoices\Vendor\ItalyStrap\Event\SubscribersConfigExtension;
 
 /**
- * The consent log context: the proof of each consent, its retention and its export.
+ * The consent log context: the proof of each consent, its retention, its export and its statistics.
  */
 final readonly class Module implements ModuleInterface
 {
@@ -60,6 +66,13 @@ final readonly class Module implements ModuleInterface
                 RetentionCleanup::class,
                 ConsentLogExport::class,
                 PrivacyPolicyText::class,
+                ConsentStatisticsEndpoint::class,
+                ConsentStatisticsAbility::class,
+            ],
+            CommandsConfigExtension::COMMANDS => [
+                'cookie-choices log' => LogNamespace::class,
+                LogExportCommand::class,
+                LogPurgeCommand::class,
             ],
         ];
     }

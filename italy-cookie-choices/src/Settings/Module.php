@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace ItalyCookieChoices\Settings;
 
+use ItalyCookieChoices\Settings\UI\Abilities;
+use ItalyCookieChoices\Console\Commands\CommandsConfigExtension;
+use ItalyCookieChoices\Settings\UI\Cli\Commands\SettingsExportCommand;
+use ItalyCookieChoices\Settings\UI\Cli\Commands\SettingsImportCommand;
+use ItalyCookieChoices\Settings\UI\Cli\Commands\SettingsNamespace;
 use ItalyCookieChoices\Settings\UI\ImportEndpoint;
+use ItalyCookieChoices\Settings\UI\NetworkSettingsPage;
 use ItalyCookieChoices\Settings\UI\PluginActionLinks;
+use ItalyCookieChoices\Settings\UI\SettingsAbility;
 use ItalyCookieChoices\Settings\UI\SettingsPage;
 use ItalyCookieChoices\Settings\UI\StringRegistration;
 use ItalyCookieChoices\Vendor\ItalyStrap\Empress\AurynConfig;
@@ -47,10 +54,19 @@ final readonly class Module implements ModuleInterface
             SubscribersConfigExtension::SUBSCRIBERS => [
                 Migration::class,
                 Registration::class,
+                SharedSettings::class,
                 StringRegistration::class,
                 SettingsPage::class,
                 ImportEndpoint::class,
                 PluginActionLinks::class,
+                Abilities::class,
+                SettingsAbility::class,
+                NetworkSettingsPage::class,
+            ],
+            CommandsConfigExtension::COMMANDS => [
+                'cookie-choices settings' => SettingsNamespace::class,
+                SettingsExportCommand::class,
+                SettingsImportCommand::class,
             ],
         ];
     }

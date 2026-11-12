@@ -1,13 +1,14 @@
 <?php
 
 /**
- * The composition root: the container autowires the plugin services and hooks them into WordPress.
+ * The composition root: the container autowires the plugin services and subscribes them to the WordPress events.
  */
 
 declare(strict_types=1);
 
 namespace ItalyCookieChoices;
 
+use ItalyCookieChoices\Console\Commands\CommandsConfigExtension;
 use ItalyCookieChoices\Vendor\ItalyStrap\Empress\ContainerBuilder;
 use ItalyCookieChoices\Vendor\ItalyStrap\Event\Module as EventModule;
 use ItalyCookieChoices\Vendor\ItalyStrap\Event\SubscribersConfigExtension;
@@ -26,7 +27,9 @@ use ItalyCookieChoices\Vendor\Psr\EventDispatcher\EventDispatcherInterface;
         ->addModule(new Blocking\Module($pluginPath, $pluginUrl))
         ->addModule(new ConsentLog\Module($pluginPath, $pluginUrl))
         ->addModule(new Integrations\Module($pluginPath, $pluginUrl))
-        ->extend(SubscribersConfigExtension::class)
+        ->addModule(new Cookies\Module($pluginPath, $pluginUrl))
+        ->addModule(new Cli\Module())
+        ->extend(SubscribersConfigExtension::class, CommandsConfigExtension::class)
         ->build();
 
     $dispatcher = $container->get(EventDispatcherInterface::class);

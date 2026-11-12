@@ -16,7 +16,16 @@
             "Accept all": [
                 ""
             ],
+            "Reject all": [
+                ""
+            ],
             "Preferences": [
+                ""
+            ],
+            "Cookie preferences": [
+                ""
+            ],
+            "Statistics": [
                 ""
             ],
             "Documentation": [
@@ -317,6 +326,162 @@
                 ""
             ],
             "When the Google tags load from a path of your site with the Google tag gateway, write the path: the scripts under it wait for the marketing consent. The tags with their id in the address, like G-XXXXXXXXXX, are blocked anyway.": [
+                ""
+            ],
+            "Microsoft consent signals": [
+                ""
+            ],
+            "Send the consent to Microsoft Advertising (UET)": [
+                ""
+            ],
+            "The UET tag gets the consent of the visitor: the ad storage is denied until the marketing category is accepted.": [
+                ""
+            ],
+            "Send the consent to Microsoft Clarity": [
+                ""
+            ],
+            "Clarity gets the consent of the visitor with its Consent API v2: the analytics storage follows the statistics category, the ad storage the marketing category. Clarity requires it for the visitors from the EEA, the UK and Switzerland.": [
+                ""
+            ],
+            "The forms that use it wait for the consent too, turn it on only when they can.": [
+                ""
+            ],
+            "Purpose": [
+                ""
+            ],
+            "Duration": [
+                ""
+            ],
+            "Cookie name": [
+                ""
+            ],
+            "Add * for a prefix, like _ga_*.": [
+                ""
+            ],
+            "Cookie category": [
+                ""
+            ],
+            "1 year": [
+                ""
+            ],
+            "Remove the cookie %s": [
+                ""
+            ],
+            "Add a cookie of %s": [
+                ""
+            ],
+            "Site cookies": [
+                ""
+            ],
+            "The cookies of the site itself, like the login of WordPress or the cart of the shop, for the cookie table. The table already lists the consent cookie and the cookies of the vendors.": [
+                ""
+            ],
+            "Add a site cookie": [
+                ""
+            ],
+            "Show a floating button to change the consent": [
+                ""
+            ],
+            "After the choice, a small button in a corner of the page opens the preferences, without adding the block or the link to the site.": [
+                ""
+            ],
+            "Position of the floating button": [
+                ""
+            ],
+            "Bottom left": [
+                ""
+            ],
+            "Bottom right": [
+                ""
+            ],
+            "Label of the floating button": [
+                ""
+            ],
+            "Read by the screen readers and shown when the pointer is over the button.": [
+                ""
+            ],
+            "%1$d (%2$d%%)": [
+                ""
+            ],
+            "The statistics were not loaded.": [
+                ""
+            ],
+            "Loading the statistics\u2026": [
+                ""
+            ],
+            "No choice logged yet.": [
+                ""
+            ],
+            "Month": [
+                ""
+            ],
+            "Choices": [
+                ""
+            ],
+            "Partial": [
+                ""
+            ],
+            "Withdrawals": [
+                ""
+            ],
+            "The choices of each month, from the records of the log: nothing else is collected. A visitor can choose more than once.": [
+                ""
+            ],
+            "Logo": [
+                ""
+            ],
+            "An image of the media library above the title of the banner.": [
+                ""
+            ],
+            "Replace the logo": [
+                ""
+            ],
+            "Choose a logo": [
+                ""
+            ],
+            "Remove the logo": [
+                ""
+            ],
+            "Box in the bottom left corner": [
+                ""
+            ],
+            "Box in the bottom right corner": [
+                ""
+            ],
+            "Respect the Global Privacy Control of the browser": [
+                ""
+            ],
+            "When the browser of the visitor asks not to share the data, accept all leaves out the marketing cookies. The visitor can still choose them in the preferences.": [
+                ""
+            ],
+            "This site uses the settings of the main site of the network: here you change only its texts, for its language.": [
+                ""
+            ],
+            "Texts": [
+                ""
+            ],
+            "Cookie domain": [
+                ""
+            ],
+            "Empty for the domain of the site only. Write the main domain, like example.com, to share the consent with its subdomains, like www.example.com and shop.example.com. A domain the site is not part of is not saved.": [
+                ""
+            ],
+            "Ask the consent again after": [
+                ""
+            ],
+            "The Italian Data Protection Authority recommends 6 months. A new policy version asks again anyway.": [
+                ""
+            ],
+            "1 month": [
+                ""
+            ],
+            "3 months": [
+                ""
+            ],
+            "6 months": [
+                ""
+            ],
+            "12 months": [
                 ""
             ]
         }

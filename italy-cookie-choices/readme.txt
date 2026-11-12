@@ -5,7 +5,7 @@ Tags: cookie, gdpr, cookie consent, cookie banner, consent mode
 Requires at least: 6.5
 Requires PHP: 8.2
 Tested up to: 7.1
-Stable tag: 3.1.0
+Stable tag: 3.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,26 +19,40 @@ The banner asks the consent by category, with three buttons of the same importan
 
 = What you can do =
 
-* Show a banner at the top, at the bottom or in a modal window, with your text, colors and CSS
+* Show a banner at the top, at the bottom, in a modal window or in a box in a corner, with your logo, text, colors and CSS
 * Let the visitors choose the categories: necessary, preferences, statistics and marketing
-* Block Google Analytics, Google Tag Manager, YouTube, Vimeo, Google Maps, Facebook, Instagram, X, LinkedIn, TikTok, Spotify, SoundCloud and Hotjar until the consent, and add your own vendors
+* Share the consent with the subdomains of the site, with the cookie domain
+* Choose after how many months the banner asks the consent again, 6 by default
+* Respect the Global Privacy Control of the browser: accept all leaves out the marketing cookies
+* Block Google Analytics, Google Tag Manager, Google Ads, AdSense, Microsoft Clarity and Advertising, YouTube, Vimeo, Google Maps, Facebook, Instagram, X, LinkedIn, TikTok, Pinterest, Snapchat, Reddit, HubSpot, Spotify, SoundCloud, Hotjar and Matomo Cloud until the consent, and add your own vendors
 * Show a placeholder with a button to accept the category of the blocked videos and maps
-* Let the visitors change or withdraw the consent with a block, a shortcode or a link
+* Let the visitors change or withdraw the consent with a block, a shortcode, a link or a floating button
+* List the cookies of the site in a table for the cookie policy, with the Cookie table block or the `[cookie_table]` shortcode
+* Delete the cookies of a category when the visitor refuses or withdraws it
 * Log the consents to demonstrate them, without IP addresses, and export the log as CSV
+* See how the visitors answer the banner, month by month, from the consent log
 * Send the Google Consent Mode v2 signals, in the basic or advanced mode
+* Send the consent to Microsoft Advertising (UET) and Microsoft Clarity
 * Write the consent to the WP Consent API, for WooCommerce, Site Kit and the other plugins that read it
+* Let the AI tools read the settings and turn the vendors on or off, with the Abilities API of WordPress 6.9
 * Print Google Analytics, Google Tag Manager and the Facebook pixel from their ids
 * Preview the banner while you change the settings
-* Translate the texts with WPML and Polylang, the plugin is translated in Italian
+* Translate the texts with WPML, Polylang, TranslatePress and Weglot, the plugin is translated in Italian
 * Import the settings of the 2.x versions
+* Manage the settings and the consent log with the `wp cookie-choices` commands of WP-CLI
+* Share the settings of the main site with every site of a multisite network, each site with its own texts
 
 = Documentation =
 
 * [Getting started](https://github.com/ItalyCookieChoices/italy-cookie-choices/blob/master/docs/getting-started.md)
 * [Blocking the third parties](https://github.com/ItalyCookieChoices/italy-cookie-choices/blob/master/docs/blocking.md)
 * [Consent log](https://github.com/ItalyCookieChoices/italy-cookie-choices/blob/master/docs/consent-log.md)
+* [Cookie table](https://github.com/ItalyCookieChoices/italy-cookie-choices/blob/master/docs/cookie-table.md)
 * [Multilingual sites](https://github.com/ItalyCookieChoices/italy-cookie-choices/blob/master/docs/multilingual.md)
+* [Multisite networks](https://github.com/ItalyCookieChoices/italy-cookie-choices/blob/master/docs/multisite.md)
 * [Integrations, for the developers](https://github.com/ItalyCookieChoices/italy-cookie-choices/blob/master/docs/integrations.md)
+* [Abilities for the AI tools](https://github.com/ItalyCookieChoices/italy-cookie-choices/blob/master/docs/abilities.md)
+* [WP-CLI commands](https://github.com/ItalyCookieChoices/italy-cookie-choices/blob/master/docs/wp-cli.md)
 * [Upgrading from 2.x](https://github.com/ItalyCookieChoices/italy-cookie-choices/blob/master/docs/upgrade-3.0.md)
 * [Documentazione in italiano](https://github.com/ItalyCookieChoices/italy-cookie-choices/blob/master/docs/it/README.md)
 
@@ -74,7 +88,7 @@ Check that **Show the banner** is on, then open the site in a private window: yo
 
 = How can the visitors change their choice? =
 
-Add the **Cookie preferences button** block, the `[cookie_preferences]` shortcode or a link to `#icc-preferences` to the footer or to the cookie policy page. It opens the preferences, where the visitor can change or withdraw the consent.
+Turn on **Show a floating button to change the consent** in the Banner tab, or add the **Cookie preferences button** block, the `[cookie_preferences]` shortcode or a link to `#icc-preferences` to the footer or to the cookie policy page. It opens the preferences, where the visitor can change or withdraw the consent.
 
 = A script of my theme is not blocked =
 
@@ -103,6 +117,21 @@ In JavaScript use `window.italyCookieChoices.hasConsent( 'statistics' )`, in PHP
 7. The placeholder of a blocked video
 
 == Changelog ==
+
+= 3.2.0 =
+
+* A cookie table for the cookie policy, with the Cookie table block or the `[cookie_table]` shortcode, and the cookies of the refused categories are deleted
+* More common vendors to block: Google Ads, AdSense, Microsoft Clarity and Advertising, Pinterest, Snapchat, Reddit, HubSpot, Matomo Cloud and Google reCAPTCHA, off by default
+* The consent is sent to Microsoft Advertising (UET) and Microsoft Clarity, on by default
+* A floating button to change or withdraw the consent
+* The banner in a box in the bottom left or right corner, with a logo from the media library
+* The statistics of the consent log, month by month
+* The Global Privacy Control of the browser is respected: accept all leaves out the marketing cookies, on by default
+* The consent lasts 1, 3, 6 or 12 months, and it can be shared with the subdomains with the cookie domain
+* On a multisite network every site can use the settings of the main site, with its own texts
+* The `wp cookie-choices` commands of WP-CLI and the abilities of the Abilities API of WordPress 6.9, for the AI tools
+* TranslatePress and Weglot translate the banner, documented
+* Only http and https addresses load in the blocked frames
 
 = 3.1.0 =
 
@@ -412,6 +441,9 @@ Dev time: 50h
 * First release.
 
 == Upgrade Notice ==
+
+= 3.2.0 =
+A cookie table, more vendors, the Microsoft consent signals, the Global Privacy Control, the multisite settings and the WP-CLI commands. The Microsoft signals and the Global Privacy Control are turned on, check them in the settings after the update.
 
 = 3.1.0 =
 Writes the consent to the WP Consent API, blocks the Google tags served by the Google tag gateway and keeps the consent for six months in Safari.

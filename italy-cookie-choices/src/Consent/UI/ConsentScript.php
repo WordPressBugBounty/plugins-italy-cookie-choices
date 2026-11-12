@@ -4,11 +4,23 @@ declare(strict_types=1);
 
 namespace ItalyCookieChoices\Consent\UI;
 
+use ItalyCookieChoices\Consent\Application\ConsentCookieDomain;
+use ItalyCookieChoices\Consent\Application\ConsentPolicyFactory;
 use ItalyCookieChoices\Consent\Domain\Category;
 use ItalyCookieChoices\Consent\Infrastructure\CookieConsentRepository;
-use ItalyCookieChoices\Consent\Application\ConsentPolicyFactory;
 use ItalyCookieChoices\Settings\Options;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\AssetLoader;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\BuildMetadata;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\BuildMetadataFile;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\EventName;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Handle;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\InlineScript;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Position;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\RegisterOnly;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Script;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\ScriptLoader;
 use ItalyCookieChoices\Vendor\ItalyStrap\Event\SubscriberInterface;
+use SplFileInfo;
 
 /**
  * Loads the JavaScript consent API in the head, the consent is checked in the browser so the pages can be cached.
@@ -20,7 +32,6 @@ final readonly class ConsentScript implements SubscriberInterface
     public const HANDLE = 'italy-cookie-choices-consent';
 
     private const SCRIPT = 'consent.js';
-    private const ASSET = 'consent.asset.php';
 
     /**
      * @param string $buildPath The assets/build folder, with the trailing slash.
@@ -29,6 +40,9 @@ final readonly class ConsentScript implements SubscriberInterface
     public function __construct(
         private ConsentPolicyFactory $policy,
         private Options $options,
+        private ConsentCookieDomain $cookieDomain,
+        private AssetLoader $assets,
+        private ScriptLoader $scripts,
         private string $buildPath,
         private string $buildUrl,
     ) {
@@ -36,7 +50,7 @@ final readonly class ConsentScript implements SubscriberInterface
 
     public function getSubscribedEvents(): iterable
     {
-        yield 'wp_enqueue_scripts' => 'enqueue';
+        yield EventName::FRONT_END => 'enqueue';
         // At the end of the head, so the listeners of its events are already there.
         yield 'wp_head' => [
             self::CALLBACK => 'print',
@@ -46,35 +60,31 @@ final readonly class ConsentScript implements SubscriberInterface
 
     public function enqueue(): void
     {
-        $asset = $this->asset();
-        if ($asset === null || !$this->options->isActive()) {
+        $metadata = $this->metadata();
+        if ($metadata === null || !$this->options->isActive()) {
             return;
         }
 
-        \wp_register_script(
-            self::HANDLE,
-            $this->buildUrl . self::SCRIPT,
-            $asset['dependencies'],
-            $asset['version'],
-            ['in_footer' => false]
-        );
-        \wp_add_inline_script(
-            self::HANDLE,
-            \sprintf('window.italyCookieChoicesConfig = %s;', (string) \wp_json_encode($this->config())),
-            'before'
-        );
+        // Only registered, the scripts that need the consent API depend on it
+        $this->assets->load(new Script(
+            handle: new Handle(self::HANDLE),
+            source: $this->buildUrl . self::SCRIPT,
+            dependencies: $metadata->dependencies(),
+            version: $metadata->version(),
+            inlineScripts: [new InlineScript(
+                \sprintf('window.italyCookieChoicesConfig = %s;', (string) \wp_json_encode($this->config())),
+                Position::Before
+            )],
+            condition: new RegisterOnly(),
+        ));
     }
 
     /**
-     * Prints the registered script, with its configuration.
+     * Prints the script with its configuration, when it is registered.
      */
     public function print(): void
     {
-        if (!\wp_script_is(self::HANDLE, 'registered')) {
-            return;
-        }
-
-        \wp_print_scripts([self::HANDLE]);
+        $this->scripts->print(new Handle(self::HANDLE));
     }
 
     /**
@@ -84,7 +94,8 @@ final readonly class ConsentScript implements SubscriberInterface
      *     version: string,
      *     durationDays: int,
      *     legacyCookie: array{name: string, value: string},
-     *     renewalUrl: string
+     *     renewalUrl: string,
+     *     cookieDomain: string
      * }
      */
     public function config(): array
@@ -103,22 +114,17 @@ final readonly class ConsentScript implements SubscriberInterface
             'durationDays' => $policy->duration()->days(),
             'legacyCookie' => $this->options->legacyCookie(),
             'renewalUrl' => \rest_url(ConsentCookieEndpoint::NAMESPACE . ConsentCookieEndpoint::ROUTE),
+            'cookieDomain' => $this->cookieDomain->forThisSite(),
         ];
     }
 
     /**
      * The dependencies and the version generated by the build, null when the assets are not built.
-     *
-     * @return array{dependencies: list<non-empty-string>, version: string}|null
      */
-    private function asset(): ?array
+    private function metadata(): ?BuildMetadata
     {
-        $file = $this->buildPath . self::ASSET;
-        if (!\is_readable($file)) {
-            return null;
-        }
+        $file = new BuildMetadataFile(new SplFileInfo($this->buildPath . self::SCRIPT));
 
-        /** @var array{dependencies: list<non-empty-string>, version: string} */
-        return require $file;
+        return $file->exists() ? $file->read() : null;
     }
 }

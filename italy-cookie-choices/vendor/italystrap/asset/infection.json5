@@ -1,0 +1,25 @@
+{
+    "$schema": "vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": ["src"],
+        // One core function for each method, the integration suite tests them
+        "excludes": ["Core"]
+    },
+    "logs": {
+        "text": "tests/_output/infection.log",
+        "github": true
+    },
+    "tmpDir": "tests/_output",
+    "timeout": 10,
+    "minMsi": 100,
+    "minCoveredMsi": 100,
+    "mutators": {
+        "@default": true,
+        // The separator is a slash on Linux, the replace changes the path only on Windows
+        "UnwrapStrReplace": {
+            "ignore": ["ItalyStrap\\Asset\\RelativePath::of"]
+        }
+    },
+    "testFramework": "codeception",
+    "testFrameworkOptions": "--skip=integration"
+}

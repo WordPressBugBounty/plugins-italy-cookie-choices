@@ -106,6 +106,10 @@ final readonly class Migration implements SubscriberInterface
             4 => $this->turnOnTheConsentLog(...),
             5 => $this->moveTheListsToTheVendors(...),
             6 => $this->turnOnTheConsentMode(...),
+            7 => $this->turnOnTheMicrosoftConsent(...),
+            8 => $this->turnOffTheNewPresets(...),
+            9 => $this->addTheCookiesOfTheCustomVendors(...),
+            10 => $this->respectTheGlobalPrivacyControl(...),
         ];
     }
 
@@ -119,7 +123,15 @@ final readonly class Migration implements SubscriberInterface
      */
     private function removeTheImplicitConsents(array $option): array
     {
-        return \array_diff_key($option, \array_flip([...self::IMPLICIT_CONSENTS, self::LEGACY_BUTTON_TEXT]));
+        $migrated = \array_diff_key($option, \array_flip(self::IMPLICIT_CONSENTS));
+        if (!\array_key_exists(self::LEGACY_BUTTON_TEXT, $migrated)) {
+            return $migrated;
+        }
+
+        // The empty text of the defaults, so the upgrade of the defaults does not change them (#300).
+        $migrated[self::LEGACY_BUTTON_TEXT] = '';
+
+        return $migrated;
     }
 
     /**
@@ -196,6 +208,63 @@ final readonly class Migration implements SubscriberInterface
     private function turnOnTheConsentMode(array $option): array
     {
         return $option + Schema::CONSENT_MODE_DEFAULTS;
+    }
+
+    /**
+     * Version 7: Microsoft Advertising and Microsoft Clarity get the consent signals, as the Google tags.
+     *
+     * @param array<array-key, mixed> $option
+     * @return array<array-key, mixed>
+     */
+    private function turnOnTheMicrosoftConsent(array $option): array
+    {
+        return $option + Schema::MICROSOFT_CONSENT_DEFAULTS;
+    }
+
+    /**
+     * Version 8: the reCAPTCHA preset starts turned off, the forms that need it keep working.
+     *
+     * @param array<array-key, mixed> $option
+     * @return array<array-key, mixed>
+     */
+    private function turnOffTheNewPresets(array $option): array
+    {
+        $disabled = \is_array($option['disabled_vendors'] ?? null) ? $option['disabled_vendors'] : [];
+        $disabled = \array_filter($disabled, \is_string(...));
+        $option['disabled_vendors'] = \array_values(\array_unique([...$disabled, ...Schema::VENDORS_OFF_BY_DEFAULT]));
+
+        return $option;
+    }
+
+    /**
+     * Version 10: accept all leaves out the marketing cookies when the browser sends the Global Privacy Control.
+     *
+     * @param array<array-key, mixed> $option
+     * @return array<array-key, mixed>
+     */
+    private function respectTheGlobalPrivacyControl(array $option): array
+    {
+        return $option + Schema::GLOBAL_PRIVACY_CONTROL_DEFAULTS;
+    }
+
+    /**
+     * Version 9: the custom vendors list their cookies, for the cookie table.
+     *
+     * @param array<array-key, mixed> $option
+     * @return array<array-key, mixed>
+     */
+    private function addTheCookiesOfTheCustomVendors(array $option): array
+    {
+        if (!\is_array($option['custom_vendors'] ?? null)) {
+            return $option;
+        }
+
+        $option['custom_vendors'] = \array_map(
+            static fn(mixed $vendor): mixed => \is_array($vendor) ? $vendor + ['cookies' => []] : $vendor,
+            $option['custom_vendors']
+        );
+
+        return $option;
     }
 
     /**

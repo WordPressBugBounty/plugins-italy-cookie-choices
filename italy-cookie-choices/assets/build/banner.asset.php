@@ -2,5 +2,5 @@
 	'dependencies' => array(
 		
 	),
-	'version' => '1092e2f54f6fcc42189c'
+	'version' => 'efe9434ff08ddbc2a733'
 );

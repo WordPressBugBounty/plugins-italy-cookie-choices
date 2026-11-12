@@ -7,9 +7,23 @@ namespace ItalyCookieChoices\Settings\UI;
 use ItalyCookieChoices\Blocking\Application\VendorPresets;
 use ItalyCookieChoices\Consent\UI\ConsentTexts;
 use ItalyCookieChoices\ConsentLog\UI\ConsentLogExport;
+use ItalyCookieChoices\Settings\NetworkSettings;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\AssetLoader;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\BuildMetadata;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\BuildMetadataFile;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Dependencies;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\EventName;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Handle;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\InlineScript;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Position;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Script;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\ScriptLoading;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Style;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Translations;
 use ItalyCookieChoices\Vendor\ItalyStrap\Config\Config;
 use ItalyCookieChoices\Vendor\ItalyStrap\Event\SubscriberInterface;
 use ItalyCookieChoices\Vendor\ItalyStrap\View\ViewInterface;
+use SplFileInfo;
 
 /**
  * The settings page, a React app that saves the option through the REST API.
@@ -23,7 +37,7 @@ final readonly class SettingsPage implements SubscriberInterface
     public const CAPABILITY = 'manage_options';
     public const DOCUMENTATION = 'https://github.com/ItalyCookieChoices/italy-cookie-choices/wiki';
 
-    private const HOOK_SUFFIX = 'toplevel_page_' . self::SLUG;
+    private const EVENT_NAME_SUFFIX = 'toplevel_page_' . self::SLUG;
     private const ICON = 'dashicons-privacy';
     /**
      * Below the Settings menu.
@@ -31,7 +45,6 @@ final readonly class SettingsPage implements SubscriberInterface
     private const POSITION = 81;
     private const SCRIPT = 'settings.js';
     private const STYLE = 'settings.css';
-    private const ASSET = 'settings.asset.php';
     private const TEMPLATE = 'settings-page';
 
     /**
@@ -43,7 +56,9 @@ final readonly class SettingsPage implements SubscriberInterface
         private ConsentTexts $texts,
         private VendorPresets $presets,
         private ConsentLogExport $logExport,
+        private NetworkSettings $network,
         private ViewInterface $view,
+        private AssetLoader $assets,
         private string $buildPath,
         private string $buildUrl,
         private string $languagesPath,
@@ -54,7 +69,7 @@ final readonly class SettingsPage implements SubscriberInterface
     {
         yield 'admin_menu' => 'addPage';
         yield 'admin_init' => 'redirectTheOldUrl';
-        yield 'admin_enqueue_scripts' => 'enqueue';
+        yield EventName::ADMIN => 'enqueue';
     }
 
     public function addPage(): void
@@ -103,28 +118,37 @@ final readonly class SettingsPage implements SubscriberInterface
         );
     }
 
-    public function enqueue(mixed $hookSuffix = ''): void
+    public function enqueue(mixed $eventNameSuffix = ''): void
     {
-        $asset = $this->asset();
-        if ($asset === null || $hookSuffix !== self::HOOK_SUFFIX) {
+        $metadata = $this->metadata();
+        if ($metadata === null || $eventNameSuffix !== self::EVENT_NAME_SUFFIX) {
             return;
         }
 
-        \wp_enqueue_script(
-            self::HANDLE,
-            $this->buildUrl . self::SCRIPT,
-            $asset['dependencies'],
-            $asset['version'],
-            ['in_footer' => true]
+        // The media library of the logo of the banner.
+        \wp_enqueue_media();
+
+        $this->assets->load(
+            new Script(
+                handle: new Handle(self::HANDLE),
+                source: $this->buildUrl . self::SCRIPT,
+                dependencies: $metadata->dependencies(),
+                version: $metadata->version(),
+                loading: new ScriptLoading(inFooter: true),
+                inlineScripts: [new InlineScript(
+                    \sprintf('window.italyCookieChoicesAdmin = %s;', (string) \wp_json_encode($this->data())),
+                    Position::Before
+                )],
+                translations: new Translations('italy-cookie-choices', new SplFileInfo($this->languagesPath)),
+            ),
+            new Style(
+                handle: new Handle(self::HANDLE),
+                source: $this->buildUrl . self::STYLE,
+                dependencies: new Dependencies('wp-components'),
+                version: $metadata->version(),
+                data: ['rtl' => 'replace'],
+            ),
         );
-        \wp_set_script_translations(self::HANDLE, 'italy-cookie-choices', $this->languagesPath);
-        \wp_add_inline_script(
-            self::HANDLE,
-            \sprintf('window.italyCookieChoicesAdmin = %s;', (string) \wp_json_encode($this->data())),
-            'before'
-        );
-        \wp_enqueue_style(self::HANDLE, $this->buildUrl . self::STYLE, ['wp-components'], $asset['version']);
-        \wp_style_add_data(self::HANDLE, 'rtl', 'replace');
     }
 
     /**
@@ -134,7 +158,8 @@ final readonly class SettingsPage implements SubscriberInterface
      *     categories: list<array{id: string, required: bool, label: string, description: string}>,
      *     vendors: list<array{id: string, name: string, category: string}>,
      *     consentLogExportUrl: string,
-     *     documentationUrl: string
+     *     documentationUrl: string,
+     *     textsOnly: bool
      * }
      */
     public function data(): array
@@ -153,22 +178,18 @@ final readonly class SettingsPage implements SubscriberInterface
             'vendors' => $vendors,
             'consentLogExportUrl' => $this->logExport->url(),
             'documentationUrl' => self::DOCUMENTATION,
+            // The other settings come from the main site of the network.
+            'textsOnly' => $this->network->usesTheMainSite(),
         ];
     }
 
     /**
      * The dependencies and the version generated by the build, null when the assets are not built.
-     *
-     * @return array{dependencies: list<non-empty-string>, version: string}|null
      */
-    private function asset(): ?array
+    private function metadata(): ?BuildMetadata
     {
-        $file = $this->buildPath . self::ASSET;
-        if (!\is_readable($file)) {
-            return null;
-        }
+        $file = new BuildMetadataFile(new SplFileInfo($this->buildPath . self::SCRIPT));
 
-        /** @var array{dependencies: list<non-empty-string>, version: string} */
-        return require $file;
+        return $file->exists() ? $file->read() : null;
     }
 }

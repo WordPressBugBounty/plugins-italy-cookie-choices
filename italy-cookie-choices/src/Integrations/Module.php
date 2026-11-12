@@ -6,7 +6,9 @@ namespace ItalyCookieChoices\Integrations;
 
 use ItalyCookieChoices\Integrations\UI\AdvancedConsentMode;
 use ItalyCookieChoices\Integrations\UI\ConsentModeScript;
+use ItalyCookieChoices\Integrations\UI\MicrosoftConsentScript;
 use ItalyCookieChoices\Integrations\UI\TrackingTags;
+use ItalyCookieChoices\Integrations\UI\WpConsentApiCookies;
 use ItalyCookieChoices\Integrations\UI\WpConsentApiFilters;
 use ItalyCookieChoices\Integrations\UI\WpConsentApiScript;
 use ItalyCookieChoices\Integrations\UI\YouTubeNoCookie;
@@ -15,8 +17,8 @@ use ItalyCookieChoices\Vendor\ItalyStrap\Empress\ModuleInterface;
 use ItalyCookieChoices\Vendor\ItalyStrap\Event\SubscribersConfigExtension;
 
 /**
- * The integrations context: Google Consent Mode v2, the WP Consent API, the Google and Facebook tags
- * and the YouTube embeds.
+ * The integrations context: Google Consent Mode v2, the Microsoft consent signals, the WP Consent API,
+ * the Google and Facebook tags and the YouTube embeds.
  */
 final readonly class Module implements ModuleInterface
 {
@@ -38,6 +40,11 @@ final readonly class Module implements ModuleInterface
             AurynConfig::DEFINITIONS => [
                 ConsentModeScript::class => [
                     ':buildPath' => $this->pluginPath . self::BUILD,
+                    ':buildUrl' => $this->pluginUrl . self::BUILD,
+                ],
+                MicrosoftConsentScript::class => [
+                    ':buildPath' => $this->pluginPath . self::BUILD,
+                    ':buildUrl' => $this->pluginUrl . self::BUILD,
                 ],
                 WpConsentApiScript::class => [
                     ':buildPath' => $this->pluginPath . self::BUILD,
@@ -51,6 +58,8 @@ final readonly class Module implements ModuleInterface
                 YouTubeNoCookie::class,
                 WpConsentApiFilters::class,
                 WpConsentApiScript::class,
+                MicrosoftConsentScript::class,
+                WpConsentApiCookies::class,
             ],
         ];
     }

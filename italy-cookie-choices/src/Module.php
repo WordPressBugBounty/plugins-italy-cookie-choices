@@ -5,7 +5,12 @@ declare(strict_types=1);
 namespace ItalyCookieChoices;
 
 use ItalyCookieChoices\I18n\TextDomain;
-use ItalyCookieChoices\Legacy\DeprecatedHooks;
+use ItalyCookieChoices\Legacy\DeprecatedEventNames;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\AssetLoader;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Core\CoreScriptRegistry;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Core\CoreStyleRegistry;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\ScriptRegistry;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\StyleRegistry;
 use ItalyCookieChoices\Vendor\ItalyStrap\Config\Config;
 use ItalyCookieChoices\Vendor\ItalyStrap\Config\ConfigInterface;
 use ItalyCookieChoices\Vendor\ItalyStrap\Empress\AurynConfig;
@@ -33,8 +38,14 @@ final readonly class Module implements ModuleInterface
     public function __invoke(): iterable
     {
         return [
+            AurynConfig::SHARING => [
+                AssetLoader::class,
+            ],
             AurynConfig::ALIASES => [
                 ConfigInterface::class => Config::class,
+                // The scripts and the styles of the UI classes, registered in the core
+                ScriptRegistry::class => CoreScriptRegistry::class,
+                StyleRegistry::class => CoreStyleRegistry::class,
             ],
             AurynConfig::DELEGATIONS => [
                 ViewInterface::class => fn(): ViewInterface => $this->view(),
@@ -46,7 +57,7 @@ final readonly class Module implements ModuleInterface
             ],
             SubscribersConfigExtension::SUBSCRIBERS => [
                 TextDomain::class,
-                DeprecatedHooks::class,
+                DeprecatedEventNames::class,
             ],
         ];
     }

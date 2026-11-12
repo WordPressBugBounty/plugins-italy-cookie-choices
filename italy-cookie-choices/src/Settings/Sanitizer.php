@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ItalyCookieChoices\Settings;
 
+use ItalyCookieChoices\Consent\Domain\CookieDomain;
+
 /**
  * Sanitizes the option saved from the settings page, the REST API or an import.
  */
@@ -20,6 +22,9 @@ final readonly class Sanitizer
     private const PATTERNS = 'patterns';
     private const TAG_ID = 'tag_id';
     private const PATH = 'path';
+    private const ATTACHMENT = 'attachment';
+    private const DOMAIN = 'domain';
+    private const SITE_COOKIES = 'site_cookies';
 
     /**
      * The fields in the order they are saved.
@@ -50,17 +55,27 @@ final readonly class Sanitizer
         'all_block' => self::RAW,
         'consent_log' => self::RAW,
         'consent_log_retention' => self::RAW,
+        'consent_duration' => self::RAW,
         'consent_mode' => self::RAW,
         'consent_mode_advanced' => self::RAW,
         'ga_measurement_id' => self::TAG_ID,
         'gtm_container_id' => self::TAG_ID,
         'facebook_pixel_id' => self::TAG_ID,
         'google_tag_gateway_path' => self::PATH,
+        'banner_logo' => self::ATTACHMENT,
+        'cookie_domain' => self::DOMAIN,
         'youtube_nocookie' => self::RAW,
+        'uet_consent_mode' => self::RAW,
+        'clarity_consent_mode' => self::RAW,
+        'floating_button' => self::RAW,
+        'global_privacy_control' => self::RAW,
+        'floating_button_position' => self::RAW,
+        'floating_button_label' => self::TEXT,
         'categories' => self::CATEGORIES,
         'disabled_vendors' => self::IDS,
         'custom_vendors' => self::VENDORS,
         'allowed_patterns' => self::PATTERNS,
+        'site_cookies' => self::SITE_COOKIES,
         'content_message_text' => self::HTML,
         'content_message_button_text' => self::TEXT,
         'excluded_pages' => self::TEXT,
@@ -118,6 +133,9 @@ final readonly class Sanitizer
             self::PATTERNS => $this->patterns($value),
             self::TAG_ID => $this->tagId($name, $value),
             self::PATH => $this->path($name, $value),
+            self::ATTACHMENT => $this->attachment($value),
+            self::DOMAIN => $this->domain($value),
+            self::SITE_COOKIES => $this->siteCookies($value),
             default => $this->required($name, $value),
         };
     }
@@ -198,6 +216,25 @@ final readonly class Sanitizer
      * The path of an address or of a text, with the leading slash and without the trailing one,
      * empty when it is the root or it has not the shape of a path, like /metrics.
      */
+    /**
+     * The id of an attachment, empty when it is not a positive number.
+     */
+    private function attachment(mixed $value): string
+    {
+        $id = \is_int($value) ? (string) $value : \trim($this->toString($value));
+
+        return \preg_match('/^[1-9][0-9]*$/', $id) === 1 ? $id : '';
+    }
+
+    /**
+     * The domain of the consent cookie, empty when the browsers would refuse it on this site.
+     */
+    private function domain(mixed $value): string
+    {
+        return (new CookieDomain($this->toString($value)))
+            ->forHost((string) \wp_parse_url(\home_url(), \PHP_URL_HOST));
+    }
+
     private function path(string $name, mixed $value): string
     {
         $path = (string) \wp_parse_url(\trim($this->toString($value)), \PHP_URL_PATH);
@@ -238,10 +275,78 @@ final readonly class Sanitizer
 
             $id = $this->toString($vendor['id'] ?? '');
             $id = $this->uniqueId($id !== '' ? $id : $name, \array_column($vendors, 'id'));
-            $vendors[] = ['id' => $id, 'name' => $name, 'category' => $category, 'patterns' => $patterns];
+            $vendors[] = [
+                'id' => $id,
+                'name' => $name,
+                'category' => $category,
+                'patterns' => $patterns,
+                'cookies' => $this->cookies($vendor['cookies'] ?? []),
+            ];
         }
 
         return $vendors;
+    }
+
+    /**
+     * The cookies of a custom vendor, without the ones with no name.
+     *
+     * @return list<array{name: string, duration: string, purpose: string}>
+     */
+    private function cookies(mixed $value): array
+    {
+        $cookies = [];
+        foreach ($this->list($value) as $cookie) {
+            $cookie = $this->cookie($cookie);
+            if ($cookie === null) {
+                continue;
+            }
+
+            $cookies[] = $cookie;
+        }
+
+        return $cookies;
+    }
+
+    /**
+     * The cookies of the site, without the ones with no name or no category.
+     *
+     * @return list<array{name: string, category: string, duration: string, purpose: string}>
+     */
+    private function siteCookies(mixed $value): array
+    {
+        $cookies = [];
+        foreach ($this->list($value) as $cookie) {
+            $category = \sanitize_key($this->toString(\is_array($cookie) ? $cookie['category'] ?? '' : ''));
+            $cookie = $this->cookie($cookie);
+            if ($cookie === null || $category === '') {
+                continue;
+            }
+
+            $cookies[] = ['name' => $cookie['name'], 'category' => $category, ...\array_slice($cookie, 1)];
+        }
+
+        return $cookies;
+    }
+
+    /**
+     * @return array{name: string, duration: string, purpose: string}|null
+     */
+    private function cookie(mixed $value): ?array
+    {
+        if (!\is_array($value)) {
+            return null;
+        }
+
+        $name = \sanitize_text_field($this->toString($value['name'] ?? ''));
+        if ($name === '') {
+            return null;
+        }
+
+        return [
+            'name' => $name,
+            'duration' => \sanitize_text_field($this->toString($value['duration'] ?? '')),
+            'purpose' => \sanitize_text_field($this->toString($value['purpose'] ?? '')),
+        ];
     }
 
     /**

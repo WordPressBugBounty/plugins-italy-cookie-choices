@@ -5,9 +5,21 @@ declare(strict_types=1);
 namespace ItalyCookieChoices\Consent\UI;
 
 use ItalyCookieChoices\Settings\Options;
-use ItalyCookieChoices\Vendor\ItalyStrap\Event\SubscriberInterface;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\AssetLoader;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\BuildMetadata;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\BuildMetadataFile;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Dependencies;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\EventName;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Handle;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\RegisterOnly;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Script;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\ScriptLoader;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\ScriptLoading;
+use ItalyCookieChoices\Vendor\ItalyStrap\Asset\Style;
 use ItalyCookieChoices\Vendor\ItalyStrap\Config\Config;
+use ItalyCookieChoices\Vendor\ItalyStrap\Event\SubscriberInterface;
 use ItalyCookieChoices\Vendor\ItalyStrap\View\ViewInterface;
+use SplFileInfo;
 
 /**
  * Prints the consent banner and the preferences dialog, hidden until the script finds no consent.
@@ -22,10 +34,11 @@ final readonly class Banner implements SubscriberInterface
 
     private const SCRIPT = 'banner.js';
     private const STYLE = 'banner.css';
-    private const ASSET = 'banner.asset.php';
     private const TEMPLATE = 'banner';
     private const CUSTOM_TEMPLATE = 'custom';
-    private const POSITIONS = ['1' => 'top', '2' => 'modal', '3' => 'bottom'];
+    private const POSITIONS = ['1' => 'top', '2' => 'modal', '3' => 'bottom', '4' => 'box-left', '5' => 'box-right'];
+
+    private const FLOATING_BUTTON_POSITIONS = ['left', 'right'];
 
     /**
      * @param string $buildPath The assets/build folder, with the trailing slash.
@@ -35,6 +48,8 @@ final readonly class Banner implements SubscriberInterface
         private ConsentTexts $texts,
         private Options $options,
         private ViewInterface $view,
+        private AssetLoader $assets,
+        private ScriptLoader $scripts,
         private string $buildPath,
         private string $buildUrl,
     ) {
@@ -42,7 +57,7 @@ final readonly class Banner implements SubscriberInterface
 
     public function getSubscribedEvents(): iterable
     {
-        yield 'wp_enqueue_scripts' => 'enqueue';
+        yield EventName::FRONT_END => 'enqueue';
         // Before the footer scripts, the banner is the first thing the keyboard reaches.
         yield 'wp_footer' => [
             self::CALLBACK => 'render',
@@ -52,35 +67,42 @@ final readonly class Banner implements SubscriberInterface
 
     public function enqueue(): void
     {
-        $asset = $this->asset();
-        if ($asset === null || !$this->isPrinted()) {
+        $metadata = $this->metadata();
+        if ($metadata === null || !$this->isPrinted()) {
             return;
         }
 
-        \wp_register_script(
-            self::HANDLE,
-            $this->buildUrl . self::SCRIPT,
-            [...$asset['dependencies'], ConsentScript::HANDLE],
-            $asset['version'],
-            ['in_footer' => true]
-        );
-
         // The custom template has only the custom CSS, without the plugin styles.
         $isCustom = $this->options->text('js_template') === self::CUSTOM_TEMPLATE;
-        \wp_register_style(self::HANDLE, $isCustom ? false : $this->buildUrl . self::STYLE, [], $asset['version']);
-        \wp_enqueue_style(self::HANDLE);
-        \wp_style_add_data(self::HANDLE, 'rtl', 'replace');
-        \wp_add_inline_style(self::HANDLE, $this->inlineStyle());
+
+        $this->assets->load(
+            // Only registered, render() prints it after the markup
+            new Script(
+                handle: new Handle(self::HANDLE),
+                source: $this->buildUrl . self::SCRIPT,
+                dependencies: $metadata->dependencies()->with(new Dependencies(ConsentScript::HANDLE)),
+                version: $metadata->version(),
+                loading: new ScriptLoading(inFooter: true),
+                condition: new RegisterOnly(),
+            ),
+            new Style(
+                handle: new Handle(self::HANDLE),
+                source: $isCustom ? null : $this->buildUrl . self::STYLE,
+                version: $metadata->version(),
+                inlineStyles: [$this->inlineStyle()],
+                data: ['rtl' => 'replace'],
+            ),
+        );
     }
 
     public function render(): void
     {
-        if ($this->asset() === null || !$this->isPrinted()) {
+        if ($this->metadata() === null || !$this->isPrinted()) {
             return;
         }
 
         echo $this->html(); // phpcs:ignore -- Escaped in the template.
-        \wp_print_scripts([self::HANDLE]);
+        $this->scripts->print(new Handle(self::HANDLE));
     }
 
     /**
@@ -96,12 +118,12 @@ final readonly class Banner implements SubscriberInterface
      */
     public function stylesheet(): ?string
     {
-        $asset = $this->asset();
-        if ($asset === null || $this->options->text('js_template') === self::CUSTOM_TEMPLATE) {
+        $metadata = $this->metadata();
+        if ($metadata === null || $this->options->text('js_template') === self::CUSTOM_TEMPLATE) {
             return null;
         }
 
-        return \add_query_arg('ver', $asset['version'], $this->buildUrl . self::STYLE);
+        return \add_query_arg('ver', $metadata->version()->value(), $this->buildUrl . self::STYLE);
     }
 
     /**
@@ -130,10 +152,52 @@ final readonly class Banner implements SubscriberInterface
             'modal' => $position === self::POSITIONS['2'],
             'opensByItself' => $this->opensByItself(),
             'reload' => $this->options->isChecked('reload'),
+            'globalPrivacyControl' => $this->options->isChecked('global_privacy_control'),
             'htmlMargin' => $position === self::POSITIONS['1'] && $this->options->isChecked('html_margin'),
             'text' => \wp_kses_post($this->options->translated('text')),
             'link' => $this->link(),
+            'floatingButton' => $this->floatingButton(),
+            'logo' => $this->logo(),
             ...$this->texts->all(),
+        ];
+    }
+
+    /**
+     * The image of the media library chosen as logo, empty without one or when it is not an image.
+     */
+    private function logo(): string
+    {
+        $id = (int) $this->options->text('banner_logo');
+        if ($id <= 0) {
+            return '';
+        }
+
+        return \wp_get_attachment_image($id, 'medium', false, [
+            'class' => 'icc-banner__logo',
+            'loading' => false,
+            'decoding' => 'async',
+        ]);
+    }
+
+    /**
+     * The button always there after a choice, to change or withdraw the consent, null when it is off.
+     *
+     * @return array{position: string, label: string}|null
+     */
+    private function floatingButton(): ?array
+    {
+        if (!$this->options->isChecked('floating_button')) {
+            return null;
+        }
+
+        $position = $this->options->text('floating_button_position');
+
+        return [
+            'position' => \in_array($position, self::FLOATING_BUTTON_POSITIONS, true) ? $position : 'left',
+            'label' => $this->options->translated(
+                'floating_button_label',
+                \__('Cookie preferences', 'italy-cookie-choices')
+            ),
         ];
     }
 
@@ -205,7 +269,7 @@ final readonly class Banner implements SubscriberInterface
         $color = \sanitize_hex_color($this->options->text('banner_text_color')) ?? '#000000';
 
         return \sprintf(
-            '.icc-banner,.icc-preferences{--icc-background:%s;--icc-color:%s;}%s',
+            '.icc-banner,.icc-preferences,.icc-floating-button{--icc-background:%s;--icc-color:%s;}%s',
             $background,
             $color,
             \wp_strip_all_tags($this->options->text('customCSS'))
@@ -214,17 +278,11 @@ final readonly class Banner implements SubscriberInterface
 
     /**
      * The dependencies and the version generated by the build, null when the assets are not built.
-     *
-     * @return array{dependencies: list<non-empty-string>, version: string}|null
      */
-    private function asset(): ?array
+    private function metadata(): ?BuildMetadata
     {
-        $file = $this->buildPath . self::ASSET;
-        if (!\is_readable($file)) {
-            return null;
-        }
+        $file = new BuildMetadataFile(new SplFileInfo($this->buildPath . self::SCRIPT));
 
-        /** @var array{dependencies: list<non-empty-string>, version: string} */
-        return require $file;
+        return $file->exists() ? $file->read() : null;
     }
 }

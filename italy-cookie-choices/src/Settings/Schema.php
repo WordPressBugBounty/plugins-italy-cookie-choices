@@ -16,7 +16,7 @@ final readonly class Schema
     public const OPTION = 'italy_cookie_choices';
     public const GROUP = 'italy_cl_options_group';
     public const VERSION_OPTION = 'italy_cookie_choices_version';
-    public const VERSION = 6;
+    public const VERSION = 10;
 
     public const COOKIE_NAME = 'displayCookieConsent';
     public const COOKIE_VALUE = 'y';
@@ -32,12 +32,18 @@ final readonly class Schema
         'consent_mode',
         'consent_mode_advanced',
         'youtube_nocookie',
+        'uet_consent_mode',
+        'clarity_consent_mode',
+        'floating_button',
+        'global_privacy_control',
     ];
 
     private const ENUMS = [
-        'banner' => ['1', '2', '3'],
+        'banner' => ['1', '2', '3', '4', '5'],
         'js_template' => ['default', 'bigbutton', 'smallbutton', 'custom'],
         'consent_log_retention' => ['3', '6', '12', '24', '36'],
+        'consent_duration' => ['30', '90', '182', '365'],
+        'floating_button_position' => ['left', 'right'],
     ];
 
     private const STRINGS = [
@@ -57,6 +63,22 @@ final readonly class Schema
         'content_message_text',
         'content_message_button_text',
         'excluded_pages',
+        'floating_button_label',
+    ];
+
+    /**
+     * The texts each site of a network keeps when it uses the settings of the main site, for its language:
+     * the TRANSLATABLE texts of Options and the texts of the categories.
+     */
+    public const SITE_TEXTS = [
+        'text',
+        'url',
+        'anchor_text',
+        'button_text',
+        'content_message_text',
+        'content_message_button_text',
+        'floating_button_label',
+        'categories',
     ];
 
     /**
@@ -71,12 +93,43 @@ final readonly class Schema
     /**
      * The paths of the site, like /metrics, empty when they are not used.
      */
+    /**
+     * The attachments of the media library, by their id, empty when there is none.
+     */
+    public const ATTACHMENTS = [
+        'banner_logo' => '^([1-9][0-9]*)?$',
+    ];
+
+    /**
+     * The domain of the consent cookie, empty for the host of the site only.
+     */
+    public const DOMAINS = [
+        'cookie_domain' => '^(\\.?[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)+)?$',
+    ];
+
     public const PATHS = [
         'google_tag_gateway_path' => '^(/[A-Za-z0-9._~-]+)*$',
     ];
 
     public const CONSENT_MODE_DEFAULTS = [
         'consent_mode' => '1',
+    ];
+
+    /**
+     * The presets of the vendors turned off on a new installation, the site owner turns them on.
+     */
+    public const VENDORS_OFF_BY_DEFAULT = ['google-recaptcha'];
+
+    public const MICROSOFT_CONSENT_DEFAULTS = [
+        'uet_consent_mode' => '1',
+        'clarity_consent_mode' => '1',
+    ];
+
+    /**
+     * Accept all leaves out the marketing category when the browser sends the Global Privacy Control signal.
+     */
+    public const GLOBAL_PRIVACY_CONTROL_DEFAULTS = [
+        'global_privacy_control' => '1',
     ];
 
     public const CONSENT_LOG_DEFAULTS = [
@@ -94,7 +147,7 @@ final readonly class Schema
     /**
      * The values stored on a new installation.
      *
-     * @return array<string, string>
+     * @return array<string, string|list<string>>
      */
     public function defaults(): array
     {
@@ -110,6 +163,9 @@ final readonly class Schema
             ...self::CONSENT_LOG_DEFAULTS,
             ...self::CONSENT_MODE_DEFAULTS,
             'youtube_nocookie' => '1',
+            ...self::MICROSOFT_CONSENT_DEFAULTS,
+            'disabled_vendors' => self::VENDORS_OFF_BY_DEFAULT,
+            ...self::GLOBAL_PRIVACY_CONTROL_DEFAULTS,
         ];
     }
 
@@ -138,6 +194,14 @@ final readonly class Schema
             $properties[$name] = ['type' => 'string', 'pattern' => $pattern];
         }
 
+        foreach (self::ATTACHMENTS as $name => $pattern) {
+            $properties[$name] = ['type' => 'string', 'pattern' => $pattern];
+        }
+
+        foreach (self::DOMAINS as $name => $pattern) {
+            $properties[$name] = ['type' => 'string', 'pattern' => $pattern];
+        }
+
         foreach (self::PATHS as $name => $pattern) {
             $properties[$name] = ['type' => 'string', 'pattern' => $pattern];
         }
@@ -160,6 +224,11 @@ final readonly class Schema
     {
         $texts = ['type' => 'array', 'items' => ['type' => 'string']];
         $id = ['type' => 'string', 'pattern' => self::ID_PATTERN];
+        $cookie = [
+            'name' => ['type' => 'string', 'minLength' => 1],
+            'duration' => ['type' => 'string'],
+            'purpose' => ['type' => 'string'],
+        ];
 
         return [
             'categories' => [
@@ -186,8 +255,26 @@ final readonly class Schema
                         'name' => ['type' => 'string'],
                         'category' => $id,
                         'patterns' => $texts,
+                        'cookies' => [
+                            'type' => 'array',
+                            'items' => [
+                                'type' => 'object',
+                                'properties' => $cookie,
+                                'required' => ['name'],
+                                'additionalProperties' => false,
+                            ],
+                        ],
                     ],
                     'required' => ['id', 'name', 'category', 'patterns'],
+                    'additionalProperties' => false,
+                ],
+            ],
+            'site_cookies' => [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'object',
+                    'properties' => [...$cookie, 'category' => $id],
+                    'required' => ['name', 'category'],
                     'additionalProperties' => false,
                 ],
             ],
