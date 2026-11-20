@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ItalyCookieChoices\Consent\UI;
 
+use ItalyCookieChoices\RestApi;
+use ItalyCookieChoices\Blocking\Application\VendorChoices;
 use ItalyCookieChoices\Consent\Application\ConsentCookieDomain;
 use ItalyCookieChoices\Consent\Application\ConsentPolicyFactory;
 use ItalyCookieChoices\Consent\Domain\Category;
@@ -41,6 +43,7 @@ final readonly class ConsentScript implements SubscriberInterface
         private ConsentPolicyFactory $policy,
         private Options $options,
         private ConsentCookieDomain $cookieDomain,
+        private VendorChoices $vendors,
         private AssetLoader $assets,
         private ScriptLoader $scripts,
         private string $buildPath,
@@ -95,7 +98,9 @@ final readonly class ConsentScript implements SubscriberInterface
      *     durationDays: int,
      *     legacyCookie: array{name: string, value: string},
      *     renewalUrl: string,
-     *     cookieDomain: string
+     *     cookieDomain: string,
+     *     vendorConsent: bool,
+     *     vendors: list<array{id: string, category: string}>
      * }
      */
     public function config(): array
@@ -113,8 +118,14 @@ final readonly class ConsentScript implements SubscriberInterface
             'version' => $policy->version()->toString(),
             'durationDays' => $policy->duration()->days(),
             'legacyCookie' => $this->options->legacyCookie(),
-            'renewalUrl' => \rest_url(ConsentCookieEndpoint::NAMESPACE . ConsentCookieEndpoint::ROUTE),
+            'renewalUrl' => \rest_url(RestApi::NAMESPACE . ConsentCookieEndpoint::ROUTE),
             'cookieDomain' => $this->cookieDomain->forThisSite(),
+            // The consent per vendor, inside the accepted categories.
+            'vendorConsent' => $this->vendors->isEnabled(),
+            'vendors' => \array_map(
+                static fn(array $vendor): array => ['id' => $vendor['id'], 'category' => $vendor['category']],
+                $this->vendors->all()
+            ),
         ];
     }
 

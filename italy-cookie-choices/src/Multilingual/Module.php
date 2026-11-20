@@ -1,0 +1,42 @@
+<?php
+
+declare(strict_types=1);
+
+namespace ItalyCookieChoices\Multilingual;
+
+use ItalyCookieChoices\Multilingual\Application\ConnectedSites;
+use ItalyCookieChoices\Multilingual\Application\LanguageTranslations;
+use ItalyCookieChoices\Multilingual\Application\Translator;
+use ItalyCookieChoices\Multilingual\Infrastructure\ActiveConnectedSites;
+use ItalyCookieChoices\Multilingual\Infrastructure\ActiveLanguageTranslations;
+use ItalyCookieChoices\Multilingual\Infrastructure\MultilingualPressTranslator;
+use ItalyCookieChoices\Multilingual\UI\ConnectionNotice;
+use ItalyCookieChoices\Multilingual\UI\LinkTranslationsEndpoint;
+use ItalyCookieChoices\Multilingual\UI\SiteTextsEndpoint;
+use ItalyCookieChoices\Vendor\ItalyStrap\Empress\AurynConfig;
+use ItalyCookieChoices\Vendor\ItalyStrap\Empress\ModuleInterface;
+use ItalyCookieChoices\Vendor\ItalyStrap\Event\SubscribersConfigExtension;
+
+/**
+ * The multilingual context: the texts of the sites of a network connected as translations by MultilingualPress
+ * or Multisite Language Switcher,
+ * edited from one settings page, filled and translated from a connected site.
+ */
+final readonly class Module implements ModuleInterface
+{
+    public function __invoke(): iterable
+    {
+        return [
+            AurynConfig::ALIASES => [
+                ConnectedSites::class => ActiveConnectedSites::class,
+                Translator::class => MultilingualPressTranslator::class,
+                LanguageTranslations::class => ActiveLanguageTranslations::class,
+            ],
+            SubscribersConfigExtension::SUBSCRIBERS => [
+                SiteTextsEndpoint::class,
+                ConnectionNotice::class,
+                LinkTranslationsEndpoint::class,
+            ],
+        ];
+    }
+}

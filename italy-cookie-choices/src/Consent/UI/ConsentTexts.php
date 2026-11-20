@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ItalyCookieChoices\Consent\UI;
 
+use ItalyCookieChoices\Consent\Application\ConsentSetting;
 use ItalyCookieChoices\Consent\Application\ConsentPolicyFactory;
 use ItalyCookieChoices\Consent\Domain\Category;
 use ItalyCookieChoices\Settings\Options;
@@ -72,19 +73,29 @@ final readonly class ConsentTexts
         return [
             BuildingBanner::TITLE => \__('Cookie consent', 'italy-cookie-choices'),
             BuildingBanner::ACCEPT_ALL => $this->options->translated(
-                'button_text',
+                ConsentSetting::ACCEPT_BUTTON_TEXT,
                 \__('Accept all', 'italy-cookie-choices')
             ),
-            BuildingBanner::REJECT_ALL => \__('Reject all', 'italy-cookie-choices'),
-            BuildingBanner::PREFERENCES => \__('Preferences', 'italy-cookie-choices'),
+            BuildingBanner::REJECT_ALL => $this->options->translated(
+                ConsentSetting::REJECT_BUTTON_TEXT,
+                \__('Reject all', 'italy-cookie-choices')
+            ),
+            BuildingBanner::PREFERENCES => $this->options->translated(
+                ConsentSetting::PREFERENCES_BUTTON_TEXT,
+                \__('Preferences', 'italy-cookie-choices')
+            ),
             BuildingBanner::CLOSE => \__('Close and keep only the necessary cookies', 'italy-cookie-choices'),
             BuildingBanner::PREFERENCES_TITLE => \__('Cookie preferences', 'italy-cookie-choices'),
-            BuildingBanner::SAVE => \__('Save preferences', 'italy-cookie-choices'),
+            BuildingBanner::SAVE => $this->options->translated(
+                ConsentSetting::SAVE_BUTTON_TEXT,
+                \__('Save preferences', 'italy-cookie-choices')
+            ),
             BuildingBanner::CLOSE_PREFERENCES => \__('Close the preferences', 'italy-cookie-choices'),
             BuildingBanner::GLOBAL_PRIVACY_CONTROL => \__(
                 'Your browser asks not to share your data: accepting all leaves out the marketing cookies.',
                 'italy-cookie-choices'
             ),
+            BuildingBanner::VENDORS => \__('Vendors', 'italy-cookie-choices'),
         ];
     }
 

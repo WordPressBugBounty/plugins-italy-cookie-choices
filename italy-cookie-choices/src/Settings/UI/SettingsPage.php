@@ -7,6 +7,12 @@ namespace ItalyCookieChoices\Settings\UI;
 use ItalyCookieChoices\Blocking\Application\VendorPresets;
 use ItalyCookieChoices\Consent\UI\ConsentTexts;
 use ItalyCookieChoices\ConsentLog\UI\ConsentLogExport;
+use ItalyCookieChoices\Consent\Domain\BannerLink;
+use ItalyCookieChoices\Migration\Application\MigrationSources;
+use ItalyCookieChoices\Migration\Domain\MigrationSource;
+use ItalyCookieChoices\Multilingual\Application\LinkTranslations;
+use ItalyCookieChoices\Multilingual\UI\LanguagesData;
+use ItalyCookieChoices\Scan\UI\ScheduleData;
 use ItalyCookieChoices\Settings\NetworkSettings;
 use ItalyCookieChoices\Vendor\ItalyStrap\Asset\AssetLoader;
 use ItalyCookieChoices\Vendor\ItalyStrap\Asset\BuildMetadata;
@@ -38,7 +44,10 @@ final readonly class SettingsPage implements SubscriberInterface
     public const DOCUMENTATION = 'https://github.com/ItalyCookieChoices/italy-cookie-choices/wiki';
 
     private const EVENT_NAME_SUFFIX = 'toplevel_page_' . self::SLUG;
-    private const ICON = 'dashicons-privacy';
+    /**
+     * The icon of the menu when the SVG is missing.
+     */
+    private const DASHICON = 'dashicons-privacy';
     /**
      * Below the Settings menu.
      */
@@ -51,17 +60,23 @@ final readonly class SettingsPage implements SubscriberInterface
      * @param string $buildPath The assets/build folder, with the trailing slash.
      * @param string $buildUrl The assets/build URL, with the trailing slash.
      * @param string $languagesPath The folder of the translations bundled with the plugin.
+     * @param string $menuIcon The SVG of the menu, in one color: WordPress paints it in the colors of the admin.
      */
     public function __construct(
         private ConsentTexts $texts,
         private VendorPresets $presets,
         private ConsentLogExport $logExport,
         private NetworkSettings $network,
+        private LanguagesData $languages,
+        private ScheduleData $scanSchedule,
+        private LinkTranslations $linkTranslations,
+        private MigrationSources $migrationSources,
         private ViewInterface $view,
         private AssetLoader $assets,
         private string $buildPath,
         private string $buildUrl,
         private string $languagesPath,
+        private string $menuIcon,
     ) {
     }
 
@@ -80,9 +95,19 @@ final readonly class SettingsPage implements SubscriberInterface
             self::CAPABILITY,
             self::SLUG,
             $this->render(...),
-            self::ICON,
+            $this->icon(),
             self::POSITION
         );
+    }
+
+    /**
+     * The SVG of the menu as a data URI, the icon of wordpress.org in one color.
+     */
+    private function icon(): string
+    {
+        $svg = \is_readable($this->menuIcon) ? \file_get_contents($this->menuIcon) : false;
+
+        return \is_string($svg) && $svg !== '' ? 'data:image/svg+xml;base64,' . \base64_encode($svg) : self::DASHICON;
     }
 
     public function url(): string
@@ -152,6 +177,21 @@ final readonly class SettingsPage implements SubscriberInterface
     }
 
     /**
+     * The links of the banner in each language of WPML or Polylang, by link.
+     *
+     * @return array<string, list<array{language: string, name: string, current: string, proposal: string}>>
+     */
+    private function linkTranslations(): array
+    {
+        $translations = [];
+        foreach (BannerLink::cases() as $link) {
+            $translations[$link->value] = $this->linkTranslations->rows($link);
+        }
+
+        return $translations;
+    }
+
+    /**
      * The data the page cannot read from the REST API.
      *
      * @return array{
@@ -159,7 +199,20 @@ final readonly class SettingsPage implements SubscriberInterface
      *     vendors: list<array{id: string, name: string, category: string}>,
      *     consentLogExportUrl: string,
      *     documentationUrl: string,
-     *     textsOnly: bool
+     *     textsOnly: bool,
+     *     postTypes: list<array{slug: string, name: string}>,
+     *     scanSchedule: array<string, mixed>,
+     *     linkTranslations: array<
+     *         string,
+     *         list<array{language: string, name: string, current: string, proposal: string}>
+     *     >,
+     *     languages: array{
+     *         siteId: int,
+     *         language: string,
+     *         sites: list<array{id: int, name: string, url: string, language: string, canTranslate: bool}>
+     *     },
+     *     canEditScripts: bool,
+     *     migrationSources: list<array{id: string, name: string}>
      * }
      */
     public function data(): array
@@ -180,7 +233,41 @@ final readonly class SettingsPage implements SubscriberInterface
             'documentationUrl' => self::DOCUMENTATION,
             // The other settings come from the main site of the network.
             'textsOnly' => $this->network->usesTheMainSite(),
+            // The post types the scan of the site reads.
+            'postTypes' => $this->postTypes(),
+            // The schedule of the scan and its last report.
+            'scanSchedule' => $this->scanSchedule->data(),
+            // The policy and legal notice links in each language of WPML or Polylang.
+            'linkTranslations' => $this->linkTranslations(),
+            // The sites connected as translations, by MultilingualPress.
+            'languages' => $this->languages->forSite(\get_current_blog_id()),
+            // Only these users change the custom scripts, like the Custom HTML block.
+            'canEditScripts' => \current_user_can('unfiltered_html'),
+            // The other consent plugins whose settings can be imported.
+            'migrationSources' => \array_map(
+                static fn(MigrationSource $source): array => ['id' => $source->id(), 'name' => $source->name()],
+                $this->migrationSources->found()
+            ),
         ];
+    }
+
+    /**
+     * The post types the visitors see, without the attachments.
+     *
+     * @return list<array{slug: string, name: string}>
+     */
+    private function postTypes(): array
+    {
+        $postTypes = [];
+        foreach (\get_post_types(['public' => true], 'objects') as $postType) {
+            if ($postType->name === 'attachment' || !\is_post_type_viewable($postType)) {
+                continue;
+            }
+
+            $postTypes[] = ['slug' => $postType->name, 'name' => (string) $postType->label];
+        }
+
+        return $postTypes;
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ItalyCookieChoices\ConsentLog\UI;
 
+use ItalyCookieChoices\RestApi;
 use ItalyCookieChoices\Consent\UI\ConsentScript;
 use ItalyCookieChoices\ConsentLog\Application\LogSettings;
 use ItalyCookieChoices\Vendor\ItalyStrap\Asset\AssetLoader;
@@ -67,7 +68,7 @@ final readonly class LogScript implements SubscriberInterface
 
     public function url(): string
     {
-        return \rest_url(ConsentLogEndpoint::NAMESPACE . ConsentLogEndpoint::ROUTE);
+        return \rest_url(RestApi::NAMESPACE . ConsentLogEndpoint::ROUTE);
     }
 
     /**

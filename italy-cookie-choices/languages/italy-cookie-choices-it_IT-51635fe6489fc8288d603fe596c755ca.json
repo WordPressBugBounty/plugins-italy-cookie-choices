@@ -37,6 +37,9 @@
             "Cookie preferences": [
                 "Preferenze cookie"
             ],
+            "Save preferences": [
+                "Salva le preferenze"
+            ],
             "Statistics": [
                 "Statistiche"
             ],
@@ -78,12 +81,6 @@
             ],
             "The link shows its address when it is empty.": [
                 "Se \u00e8 vuoto, il link mostra il suo indirizzo."
-            ],
-            "Open the policy in a new tab": [
-                "Apri la policy in una nuova scheda"
-            ],
-            "Add rel=\"nofollow\" to the policy link": [
-                "Aggiungi rel=\"nofollow\" al link alla policy"
             ],
             "Accept button text": [
                 "Testo del pulsante di accettazione"
@@ -483,6 +480,262 @@
             ],
             "12 months": [
                 "12 mesi"
+            ],
+            "The texts were not filled.": [
+                "I testi non sono stati compilati."
+            ],
+            "The policy page of a connected site has a translation for this site:": [
+                "La pagina della policy di un sito collegato ha una traduzione per questo sito:"
+            ],
+            "Use this link": [
+                "Usa questo link"
+            ],
+            "The empty texts were filled: check them and save the changes.": [
+                "I testi vuoti sono stati compilati: controllali e salva le modifiche."
+            ],
+            "The texts of this site": [
+                "I testi di questo sito"
+            ],
+            "Fills only the empty texts, the texts already written stay. The policy link is never filled.": [
+                "Compila solo i testi vuoti, i testi gi\u00e0 scritti restano. Il link alla policy non viene mai compilato."
+            ],
+            "Fill from": [
+                "Compila da"
+            ],
+            "Copy the empty texts": [
+                "Copia i testi vuoti"
+            ],
+            "Translate the empty texts": [
+                "Traduci i testi vuoti"
+            ],
+            "Loading the texts\u2026": [
+                "Caricamento dei testi\u2026"
+            ],
+            "Copy the empty texts from this site": [
+                "Copia i testi vuoti da questo sito"
+            ],
+            "Translate the empty texts from this site": [
+                "Traduci i testi vuoti da questo sito"
+            ],
+            "The texts of %s were saved.": [
+                "I testi di %s sono stati salvati."
+            ],
+            "The texts were not saved.": [
+                "I testi non sono stati salvati."
+            ],
+            "Save the texts of %s": [
+                "Salva i testi di %s"
+            ],
+            "Languages": [
+                "Lingue"
+            ],
+            "Home page": [
+                "Home page"
+            ],
+            "Scanned %1$d of %2$d pages.": [
+                "Scansionate %1$d pagine su %2$d."
+            ],
+            "There are no published pages to scan in the selection.": [
+                "Nella selezione non ci sono pagine pubblicate da scansionare."
+            ],
+            "%d page": [
+                "%d pagina",
+                "%d pagine"
+            ],
+            "Scan the site": [
+                "Scansiona il sito"
+            ],
+            "Reads the chosen pages from the server and finds the vendors of their scripts, frames and tracking pixels. It does not see the cookies set by JavaScript, they come from the vendors.": [
+                "Legge le pagine scelte dal server e trova i fornitori dei loro script, frame e pixel di tracciamento. Non vede i cookie impostati da JavaScript, arrivano dai fornitori."
+            ],
+            "Posts and pages": [
+                "Articoli e pagine"
+            ],
+            "The scan failed.": [
+                "La scansione non \u00e8 riuscita."
+            ],
+            "The selection has more pages than the limit, only the first ones are scanned.": [
+                "La selezione ha pi\u00f9 pagine del limite, vengono scansionate solo le prime."
+            ],
+            "Vendors found": [
+                "Fornitori trovati"
+            ],
+            "Block %s": [
+                "Blocca %s"
+            ],
+            "%1$s, a custom vendor, blocked: %2$s": [
+                "%1$s, un fornitore personalizzato, bloccato: %2$s"
+            ],
+            "Unknown third parties": [
+                "Terze parti sconosciute"
+            ],
+            "Their scripts and frames are not blocked. Add them as custom vendors when they set cookies: some, like the libraries served by a CDN, do not.": [
+                "I loro script e frame non vengono bloccati. Aggiungili come fornitori personalizzati quando impostano cookie: alcuni, come le librerie servite da una CDN, non lo fanno."
+            ],
+            "Add %s as a custom vendor": [
+                "Aggiungi %s come fornitore personalizzato"
+            ],
+            "Add as a custom vendor": [
+                "Aggiungi come fornitore personalizzato"
+            ],
+            "Scheduled scan": [
+                "Scansione programmata"
+            ],
+            "Scan the chosen pages": [
+                "Scansiona le pagine scelte"
+            ],
+            "Never": [
+                "Mai"
+            ],
+            "Every day": [
+                "Ogni giorno"
+            ],
+            "Every week": [
+                "Ogni settimana"
+            ],
+            "Every month": [
+                "Ogni mese"
+            ],
+            "Email the new findings to %s": [
+                "Invia i nuovi risultati via email a %s"
+            ],
+            "The schedule is saved.": [
+                "La programmazione \u00e8 stata salvata."
+            ],
+            "The schedule was not saved.": [
+                "La programmazione non \u00e8 stata salvata."
+            ],
+            "Save the schedule": [
+                "Salva la programmazione"
+            ],
+            "Last scheduled scan: %1$s, %2$d pages. Vendors not blocked: %3$s. Unknown third parties: %4$s.": [
+                "Ultima scansione programmata: %1$s, %2$d pagine. Fornitori non bloccati: %3$s. Terze parti sconosciute: %4$s."
+            ],
+            "Policy link in each language": [
+                "Link alla policy in ogni lingua"
+            ],
+            "The translation of the policy page in each language, from the multilingual plugin. The policy can change between countries: use a link only when it fits.": [
+                "La traduzione della pagina della policy in ogni lingua, dal plugin multilingua. La policy pu\u00f2 cambiare tra i paesi: usa un link solo quando \u00e8 adatto."
+            ],
+            "Not translated: the banner links the page of the main language.": [
+                "Non tradotto: il banner porta alla pagina della lingua principale."
+            ],
+            "Translation of the policy page:": [
+                "Traduzione della pagina della policy:"
+            ],
+            "Use this link for %s": [
+                "Usa questo link per %s"
+            ],
+            "The policy link of %s is saved.": [
+                "Il link alla policy di %s \u00e8 stato salvato."
+            ],
+            "The policy link was not saved.": [
+                "Il link alla policy non \u00e8 stato salvato."
+            ],
+            "Let the visitors choose the single vendors": [
+                "Fai scegliere ai visitatori i singoli fornitori"
+            ],
+            "The preferences list the vendors of each category: a visitor can accept only some of them. The guidelines of the Italian Data Protection Authority ask to choose the third parties too.": [
+                "Le preferenze elencano i fornitori di ogni categoria: un visitatore pu\u00f2 accettarne solo alcuni. Le linee guida del Garante per la protezione dei dati personali chiedono di poter scegliere anche le terze parti."
+            ],
+            "Script name": [
+                "Nome dello script"
+            ],
+            "The code runs after the consent to this category, the necessary one runs on every page.": [
+                "Il codice viene eseguito dopo il consenso a questa categoria, quello della categoria necessaria in ogni pagina."
+            ],
+            "In the head": [
+                "Nell'head"
+            ],
+            "At the end of the body": [
+                "Alla fine del body"
+            ],
+            "Code": [
+                "Codice"
+            ],
+            "HTML: the scripts and the elements they need, like the image of a pixel. Nothing of it loads before the consent.": [
+                "HTML: gli script e gli elementi di cui hanno bisogno, come l'immagine di un pixel. Niente viene caricato prima del consenso."
+            ],
+            "Remove the script %s": [
+                "Rimuovi lo script %s"
+            ],
+            "Add a script": [
+                "Aggiungi uno script"
+            ],
+            "Only the administrators who can save unfiltered HTML change the scripts.": [
+                "Solo gli amministratori che possono salvare HTML non filtrato modificano gli script."
+            ],
+            "Scripts after the consent": [
+                "Script dopo il consenso"
+            ],
+            "Code the plugin adds to the pages after the consent to its category, like a chat or a tracking snippet that no vendor covers.": [
+                "Codice che il plugin aggiunge alle pagine dopo il consenso alla sua categoria, come una chat o uno snippet di tracciamento che nessun fornitore copre."
+            ],
+            "Reject button text": [
+                "Testo del pulsante di rifiuto"
+            ],
+            "Preferences button text": [
+                "Testo del pulsante delle preferenze"
+            ],
+            "Save button text": [
+                "Testo del pulsante di salvataggio"
+            ],
+            "The button of the preferences that saves the choice.": [
+                "Il pulsante delle preferenze che salva la scelta."
+            ],
+            "Legal notice page": [
+                "Pagina delle note legali"
+            ],
+            "Type to search the page of the legal notice, the banner links to it next to the policy and does not open by itself there.": [
+                "Scrivi per cercare la pagina delle note legali, il banner la collega accanto alla policy e l\u00ec non si apre da solo."
+            ],
+            "Legal notice link": [
+                "Link alle note legali"
+            ],
+            "Legal notice link text": [
+                "Testo del link alle note legali"
+            ],
+            "Legal notice link in each language": [
+                "Link alle note legali in ogni lingua"
+            ],
+            "The translation of the legal notice page in each language, from the multilingual plugin.": [
+                "La traduzione della pagina delle note legali in ogni lingua, dal plugin multilingua."
+            ],
+            "The legal notice link of %s is saved.": [
+                "Il link alle note legali di %s \u00e8 salvato."
+            ],
+            "The legal notice link was not saved.": [
+                "Il link alle note legali non \u00e8 stato salvato."
+            ],
+            "Translation of the legal notice page:": [
+                "Traduzione della pagina delle note legali:"
+            ],
+            "Open the links in a new tab": [
+                "Apri i link in una nuova scheda"
+            ],
+            "Add rel=\"nofollow\" to the links": [
+                "Aggiungi rel=\"nofollow\" ai link"
+            ],
+            "The import changes:": [
+                "L'importazione cambia:"
+            ],
+            "To check:": [
+                "Da controllare:"
+            ],
+            "Import from another plugin": [
+                "Importa da un altro plugin"
+            ],
+            "The settings of these plugins are in the database. The import replaces the settings it brings, the others stay; the visitors are asked for the consent again.": [
+                "Le impostazioni di questi plugin sono nel database. L'importazione sostituisce le impostazioni che porta, le altre restano; ai visitatori viene chiesto di nuovo il consenso."
+            ],
+            "Preview the import of %s": [
+                "Anteprima dell'importazione di %s"
+            ],
+            "Import the settings of %s": [
+                "Importa le impostazioni di %s"
+            ],
+            "Imported:": [
+                "Importato:"
             ]
         }
     }

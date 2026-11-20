@@ -5,7 +5,7 @@ Tags: cookie, gdpr, cookie consent, cookie banner, consent mode
 Requires at least: 6.5
 Requires PHP: 8.2
 Tested up to: 7.1
-Stable tag: 3.2.0
+Stable tag: 3.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,7 +25,11 @@ The banner asks the consent by category, with three buttons of the same importan
 * Choose after how many months the banner asks the consent again, 6 by default
 * Respect the Global Privacy Control of the browser: accept all leaves out the marketing cookies
 * Block Google Analytics, Google Tag Manager, Google Ads, AdSense, Microsoft Clarity and Advertising, YouTube, Vimeo, Google Maps, Facebook, Instagram, X, LinkedIn, TikTok, Pinterest, Snapchat, Reddit, HubSpot, Spotify, SoundCloud, Hotjar and Matomo Cloud until the consent, and add your own vendors
+* Scan the pages of the site to find the vendors to block and the unknown third parties
+* Add your own scripts, like a chat or a tracking snippet, that run after the consent to their category
+* Import the settings of Complianz, CookieYes, Cookie Notice, GDPR Cookie Compliance and Borlabs Cookie, from the settings page or WP-CLI
 * Show a placeholder with a button to accept the category of the blocked videos and maps
+* Let the visitors choose the single vendors inside each category, as the Italian guidelines ask
 * Let the visitors change or withdraw the consent with a block, a shortcode, a link or a floating button
 * List the cookies of the site in a table for the cookie policy, with the Cookie table block or the `[cookie_table]` shortcode
 * Delete the cookies of a category when the visitor refuses or withdraws it
@@ -37,7 +41,7 @@ The banner asks the consent by category, with three buttons of the same importan
 * Let the AI tools read the settings and turn the vendors on or off, with the Abilities API of WordPress 6.9
 * Print Google Analytics, Google Tag Manager and the Facebook pixel from their ids
 * Preview the banner while you change the settings
-* Translate the texts with WPML, Polylang, TranslatePress and Weglot, the plugin is translated in Italian
+* Translate the texts with WPML, Polylang, TranslatePress, Weglot, MultilingualPress and Multisite Language Switcher, the plugin is translated in Italian
 * Import the settings of the 2.x versions
 * Manage the settings and the consent log with the `wp cookie-choices` commands of WP-CLI
 * Share the settings of the main site with every site of a multisite network, each site with its own texts
@@ -110,13 +114,25 @@ In JavaScript use `window.italyCookieChoices.hasConsent( 'statistics' )`, in PHP
 
 1. The settings page, with the preview of the banner
 2. The names and descriptions of the categories, with the preview of the preferences
-3. The vendors blocked until the consent
+3. The scan of the site, before the vendors blocked until the consent
 4. Google Consent Mode v2, the Google and Facebook tags and the YouTube embeds
 5. The banner at the bottom of a page
 6. The preferences, to choose the categories
 7. The placeholder of a blocked video
 
 == Changelog ==
+
+= 3.3.0 =
+
+* Import the settings of Complianz, CookieYes, Cookie Notice & Compliance, GDPR Cookie Compliance and Borlabs Cookie, from the Tools tab, a notice or `wp cookie-choices migrate`
+* Scan the site for the vendors and the unknown third parties, now or on a schedule with an email
+* The consent per vendor, inside the accepted categories, and the cookies of a refused vendor are deleted
+* Scripts of the site owner that run after the consent of a category
+* The texts of the reject, preferences and save buttons, and a legal notice link in the banner
+* A dashboard widget with the status of the settings and the consents of the month
+* MultilingualPress and Multisite Language Switcher translate the banner, WPML and Polylang propose the translated policy page
+* Copy the settings between the sites of a network
+* The menu uses the icon of the plugin
 
 = 3.2.0 =
 
@@ -441,6 +457,9 @@ Dev time: 50h
 * First release.
 
 == Upgrade Notice ==
+
+= 3.3.0 =
+Imports the settings of five other consent plugins, scans the site for the vendors, asks the consent per vendor and adds a dashboard widget with the status of the settings.
 
 = 3.2.0 =
 A cookie table, more vendors, the Microsoft consent signals, the Global Privacy Control, the multisite settings and the WP-CLI commands. The Microsoft signals and the Global Privacy Control are turned on, check them in the settings after the update.

@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace ItalyCookieChoices\Settings;
 
+use ItalyCookieChoices\Blocking\Application\BlockingSetting;
+use ItalyCookieChoices\ConsentLog\Application\LogSetting;
+use ItalyCookieChoices\Consent\Application\ConsentSetting;
+use ItalyCookieChoices\Cookies\Application\CookieSetting;
+use ItalyCookieChoices\Integrations\Application\IntegrationSetting;
 use ItalyCookieChoices\Consent\Domain\CookieDomain;
 
 /**
@@ -25,72 +30,82 @@ final readonly class Sanitizer
     private const ATTACHMENT = 'attachment';
     private const DOMAIN = 'domain';
     private const SITE_COOKIES = 'site_cookies';
+    private const SCRIPTS = 'scripts';
+    private const SCRIPT_POSITIONS = ['head', 'body'];
 
     /**
      * The fields in the order they are saved.
      */
     private const FIELDS = [
-        'active' => self::RAW,
-        'banner' => self::RAW,
-        'reload' => self::RAW,
-        'text' => self::HTML,
-        'url' => self::TEXT,
-        'slug' => self::TEXT,
-        'anchor_text' => self::TEXT,
-        'button_text' => self::TEXT,
-        'html_margin' => self::RAW,
-        'js_template' => self::RAW,
-        'banner_bg' => self::TEXT_OR_DEFAULT,
-        'banner_text_color' => self::TEXT_OR_DEFAULT,
-        'customCSS' => self::TEXT,
-        'bannerStyle' => self::TEXT_OR_DEFAULT,
-        'contentStyle' => self::TEXT_OR_DEFAULT,
-        'consentText' => self::TEXT_OR_DEFAULT,
-        'infoClass' => self::TEXT_OR_DEFAULT,
-        'closeClass' => self::TEXT_OR_DEFAULT,
-        'cookie_name' => self::REQUIRED,
-        'cookie_value' => self::REQUIRED,
-        'target' => self::RAW,
-        'nofollow' => self::RAW,
-        'all_block' => self::RAW,
-        'consent_log' => self::RAW,
-        'consent_log_retention' => self::RAW,
-        'consent_duration' => self::RAW,
-        'consent_mode' => self::RAW,
-        'consent_mode_advanced' => self::RAW,
-        'ga_measurement_id' => self::TAG_ID,
-        'gtm_container_id' => self::TAG_ID,
-        'facebook_pixel_id' => self::TAG_ID,
-        'google_tag_gateway_path' => self::PATH,
-        'banner_logo' => self::ATTACHMENT,
-        'cookie_domain' => self::DOMAIN,
-        'youtube_nocookie' => self::RAW,
-        'uet_consent_mode' => self::RAW,
-        'clarity_consent_mode' => self::RAW,
-        'floating_button' => self::RAW,
-        'global_privacy_control' => self::RAW,
-        'floating_button_position' => self::RAW,
-        'floating_button_label' => self::TEXT,
-        'categories' => self::CATEGORIES,
-        'disabled_vendors' => self::IDS,
-        'custom_vendors' => self::VENDORS,
-        'allowed_patterns' => self::PATTERNS,
-        'site_cookies' => self::SITE_COOKIES,
-        'content_message_text' => self::HTML,
-        'content_message_button_text' => self::TEXT,
-        'excluded_pages' => self::TEXT,
+        PluginSetting::ACTIVE => self::RAW,
+        ConsentSetting::POSITION => self::RAW,
+        ConsentSetting::RELOAD => self::RAW,
+        ConsentSetting::TEXT => self::HTML,
+        ConsentSetting::POLICY_URL => self::TEXT,
+        ConsentSetting::POLICY_PAGE => self::TEXT,
+        ConsentSetting::POLICY_TEXT => self::TEXT,
+        ConsentSetting::ACCEPT_BUTTON_TEXT => self::TEXT,
+        ConsentSetting::REJECT_BUTTON_TEXT => self::TEXT,
+        ConsentSetting::PREFERENCES_BUTTON_TEXT => self::TEXT,
+        ConsentSetting::SAVE_BUTTON_TEXT => self::TEXT,
+        ConsentSetting::LEGAL_NOTICE_PAGE => self::TEXT,
+        ConsentSetting::LEGAL_NOTICE_URL => self::TEXT,
+        ConsentSetting::LEGAL_NOTICE_TEXT => self::TEXT,
+        ConsentSetting::HTML_MARGIN => self::RAW,
+        ConsentSetting::TEMPLATE => self::RAW,
+        ConsentSetting::BACKGROUND_COLOR => self::TEXT_OR_DEFAULT,
+        ConsentSetting::TEXT_COLOR => self::TEXT_OR_DEFAULT,
+        ConsentSetting::CUSTOM_CSS => self::TEXT,
+        ConsentSetting::BANNER_CLASS => self::TEXT_OR_DEFAULT,
+        ConsentSetting::CONTENT_CLASS => self::TEXT_OR_DEFAULT,
+        ConsentSetting::TEXT_CLASS => self::TEXT_OR_DEFAULT,
+        ConsentSetting::LINK_CLASS => self::TEXT_OR_DEFAULT,
+        ConsentSetting::BUTTON_CLASS => self::TEXT_OR_DEFAULT,
+        PluginSetting::LEGACY_COOKIE_NAME => self::REQUIRED,
+        PluginSetting::LEGACY_COOKIE_VALUE => self::REQUIRED,
+        ConsentSetting::LINKS_IN_NEW_TAB => self::RAW,
+        ConsentSetting::LINKS_NOFOLLOW => self::RAW,
+        BlockingSetting::WHOLE_PAGE => self::RAW,
+        LogSetting::ACTIVE => self::RAW,
+        LogSetting::RETENTION => self::RAW,
+        ConsentSetting::CONSENT_DURATION => self::RAW,
+        IntegrationSetting::CONSENT_MODE => self::RAW,
+        IntegrationSetting::CONSENT_MODE_ADVANCED => self::RAW,
+        IntegrationSetting::GA_MEASUREMENT_ID => self::TAG_ID,
+        IntegrationSetting::GTM_CONTAINER_ID => self::TAG_ID,
+        IntegrationSetting::FACEBOOK_PIXEL_ID => self::TAG_ID,
+        BlockingSetting::GOOGLE_TAG_GATEWAY_PATH => self::PATH,
+        ConsentSetting::LOGO => self::ATTACHMENT,
+        ConsentSetting::COOKIE_DOMAIN => self::DOMAIN,
+        IntegrationSetting::YOUTUBE_NOCOOKIE => self::RAW,
+        IntegrationSetting::UET_CONSENT_MODE => self::RAW,
+        IntegrationSetting::CLARITY_CONSENT_MODE => self::RAW,
+        ConsentSetting::FLOATING_BUTTON => self::RAW,
+        ConsentSetting::GLOBAL_PRIVACY_CONTROL => self::RAW,
+        BlockingSetting::VENDOR_CONSENT => self::RAW,
+        ConsentSetting::FLOATING_BUTTON_POSITION => self::RAW,
+        ConsentSetting::FLOATING_BUTTON_LABEL => self::TEXT,
+        ConsentSetting::CATEGORIES => self::CATEGORIES,
+        BlockingSetting::DISABLED_VENDORS => self::IDS,
+        BlockingSetting::CUSTOM_VENDORS => self::VENDORS,
+        BlockingSetting::ALLOWED_PATTERNS => self::PATTERNS,
+        CookieSetting::SITE_COOKIES => self::SITE_COOKIES,
+        BlockingSetting::CUSTOM_SCRIPTS => self::SCRIPTS,
+        BlockingSetting::PLACEHOLDER_TEXT => self::HTML,
+        BlockingSetting::PLACEHOLDER_BUTTON_TEXT => self::TEXT,
+        ConsentSetting::EXCLUDED_PAGES => self::TEXT,
     ];
 
     private const DEFAULTS = [
-        'banner_bg' => '#fff',
-        'banner_text_color' => '#000',
-        'bannerStyle' => 'bannerStyle',
-        'contentStyle' => 'contentStyle',
-        'consentText' => 'consentText',
-        'infoClass' => 'italybtn',
-        'closeClass' => 'italybtn',
-        'cookie_name' => Schema::COOKIE_NAME,
-        'cookie_value' => Schema::COOKIE_VALUE,
+        ConsentSetting::BACKGROUND_COLOR => '#fff',
+        ConsentSetting::TEXT_COLOR => '#000',
+        ConsentSetting::BANNER_CLASS => 'bannerStyle',
+        ConsentSetting::CONTENT_CLASS => 'contentStyle',
+        ConsentSetting::TEXT_CLASS => 'consentText',
+        ConsentSetting::LINK_CLASS => 'italybtn',
+        ConsentSetting::BUTTON_CLASS => 'italybtn',
+        PluginSetting::LEGACY_COOKIE_NAME => Schema::COOKIE_NAME,
+        PluginSetting::LEGACY_COOKIE_VALUE => Schema::COOKIE_VALUE,
     ];
 
     private const CATEGORY_TEXTS = ['label', 'description'];
@@ -104,7 +119,7 @@ final readonly class Sanitizer
         $sanitized = [];
 
         foreach (self::FIELDS as $name => $rule) {
-            $value = $input[$name] ?? null;
+            $value = $rule === self::SCRIPTS && !$this->canSaveScripts() ? $this->saved($name) : $input[$name] ?? null;
             if ($value === null && !$this->hasDefault($rule)) {
                 continue;
             }
@@ -136,6 +151,7 @@ final readonly class Sanitizer
             self::ATTACHMENT => $this->attachment($value),
             self::DOMAIN => $this->domain($value),
             self::SITE_COOKIES => $this->siteCookies($value),
+            self::SCRIPTS => $this->scripts($value),
             default => $this->required($name, $value),
         };
     }
@@ -155,7 +171,7 @@ final readonly class Sanitizer
             return \sanitize_text_field($this->toString($value));
         }
 
-        $message = $name === 'cookie_name'
+        $message = $name === PluginSetting::LEGACY_COOKIE_NAME
             ? \__('Cookie name field it can\'t be empty. Restored default name.', 'italy-cookie-choices')
             : \__('Cookie value field it can\'t be empty. Restored default value.', 'italy-cookie-choices');
         \add_settings_error('italy_cookie_id', 'cookie_name_ID', $message, 'error');
@@ -326,6 +342,53 @@ final readonly class Sanitizer
         }
 
         return $cookies;
+    }
+
+    /**
+     * The custom scripts with a category and their code, kept as it is: only the users who can save
+     * unfiltered HTML change them.
+     *
+     * @return list<array{name: string, category: string, position: string, code: string}>
+     */
+    private function scripts(mixed $value): array
+    {
+        $scripts = [];
+        foreach ($this->list($value) as $script) {
+            $script = \is_array($script) ? $script : [];
+            $category = \sanitize_key($this->toString($script['category'] ?? ''));
+            $code = \trim(\wp_check_invalid_utf8($this->toString($script['code'] ?? '')));
+            if ($category === '' || $code === '') {
+                continue;
+            }
+
+            $position = $this->toString($script['position'] ?? '');
+            $scripts[] = [
+                'name' => \sanitize_text_field($this->toString($script['name'] ?? '')),
+                'category' => $category,
+                'position' => \in_array($position, self::SCRIPT_POSITIONS, true) ? $position : 'body',
+                'code' => $code,
+            ];
+        }
+
+        return $scripts;
+    }
+
+    /**
+     * Like the Custom HTML block: the administrators of a site, the super admins of a network, and WP-CLI.
+     */
+    private function canSaveScripts(): bool
+    {
+        return \current_user_can('unfiltered_html') || (\defined('WP_CLI') && \WP_CLI);
+    }
+
+    /**
+     * The saved value of a field, null when it is not saved.
+     */
+    private function saved(string $name): mixed
+    {
+        $saved = \get_option(Schema::OPTION);
+
+        return \is_array($saved) ? $saved[$name] ?? null : null;
     }
 
     /**
